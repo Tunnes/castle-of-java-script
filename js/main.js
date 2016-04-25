@@ -10,7 +10,9 @@ function main(){
     //Recursos do Game
     var background = new Image();
     background.src = "../img/imgDeFundo.jpg";
-    
+
+    var panda = new Image();
+    panda.src = "../img/panda.png"
     //Objetos
     var sprites = [];
     var mundoDoGame = {
@@ -20,6 +22,15 @@ function main(){
       width: 1920,
       height: 1080
     };
+    var char = {
+        img: panda,
+        x: 0,
+        y: 0,
+        width: 128,
+        width: 128
+    };
+    sprites.push(char);
+    
     
     sprites.push(mundoDoGame);
     
