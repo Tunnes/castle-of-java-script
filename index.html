@@ -1,10 +1,46 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script type="text/javascript" src="js/main.js"></script>
-        <link rel="stylesheet" href="css/main.css" type="text/css" />
+        <!-- Elementos do Bootstrap ---------------------------------------------------------------------------->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <!------------------------------------------------------------------------------------------------------>    
+
+        <!-- Elementos da Página ------------------------------------------------------------------------------->
+            <meta charset="UTF-08">
+            <title>Castel-Of-Js</title> 
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!------------------------------------------------------------------------------------------------------>
+        
+        <!-- Elementos de Importação --------------------------------------------------------------------------->
+            <script type="text/javascript" src="js/main.js"></script>
+            <link rel="stylesheet" href="css/main.css" type="text/css"/>
+        <!------------------------------------------------------------------------------------------------------>
     </head>
-    
-    <body onload="iniciarGame()">
+    <body>
+        <!-- Menu Principal ------------------------------------------------------------------------------------>
+        <nav class="navbar navbar-defalut">
+          <div class="container">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">MyGame</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">Game</a></li>
+              <li><a href="#">About</a></li> 
+              <li><a href="#">Contact</a></li> 
+            </ul>
+          </div>
+        </nav>
+        <!------------------------------------------------------------------------------------------------------>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <canvas id="telaDoJogo"></canvas>
+                    <script> main(); </script>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
