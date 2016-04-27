@@ -27,8 +27,8 @@ function main(){
         img: player,
         x: 0,
         y: 0,
-        width: 128,
-        height: 128
+        width: 64,
+        height: 64
     };
 
     sprites.push(mundoDoGame);
@@ -103,18 +103,17 @@ function main(){
     function atualiza(){
         // TENHO QUE TENTAR DEIXAR ISSO MAIS LIMPO.. E TALVEZ FUNCIONAL ;)
         if(moveEsquerda && !moveDireita){
-            char.x = char.x - 2;
+            char.x = char.x - 10;
         }
         if(moveCima && !moveBaixo){
-            char.y = char.y - 2;
+            char.y = char.y - 10;
         }
         if(moveDireita && !moveEsquerda){
-            char.x = char.x + 2;
+            char.x = char.x + 10;
         }
         if(moveBaixo && !moveCima){
-            char.y = char.y + 2;
+            char.y = char.y + 10;
         }
-    }
     // ATUALIZAÇÃO DA CAMERA EM FUNÇÃO DO PLAYER.
         if(char.x < camera.frontEsquerda()){
             camera.x = char.x - (camera.width * 0.25); 
@@ -129,6 +128,8 @@ function main(){
             camera.y = char.y + char.height - (camera.height * 0.75); 
         }
         
+    }
+    
     //===================================================================================================
     function renderiza(){
         contexto.save();
