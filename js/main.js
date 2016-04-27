@@ -12,8 +12,9 @@ function main(){
     background.src = "../img/imgDeFundo.jpg";
 
     var panda = new Image();
-    panda.src = "../img/panda.png"
-    //Objetos
+    panda.src = "../img/panda.png";
+    
+    //Objetos do game a serem renderizados.
     var sprites = [];
     var mundoDoGame = {
       img: background,
@@ -27,12 +28,12 @@ function main(){
         x: 0,
         y: 0,
         width: 128,
-        width: 128
+        height: 128
     };
-    sprites.push(char);
-    
-    
+
     sprites.push(mundoDoGame);
+    sprites.push(char);
+   
     
     var camera = {
         x: 0,
@@ -40,8 +41,8 @@ function main(){
         width:  canvas.width,
         height: canvas.height,
         
-        frontDireita:   function (){ return this.x + this.width * 0.25 },
-        frontEsquerda:  function (){ return this.x + this.width * 0.75 },
+        frontDireita:   function (){ return this.x + this.width  * 0.25 },
+        frontEsquerda:  function (){ return this.x + this.width  * 0.75 },
         frontAlto:      function (){ return this.x + this.height * 0.25 },
         frontBaixo:     function (){ return this.x + this.height * 0.75 }
         
