@@ -98,17 +98,18 @@ function main(){
         renderiza();
     }
     function atualiza(){
+        // TENHO QUE TENTAR DEIXAR ISSO MAIS LIMPO.. E TALVEZ FUNCIONAL ;)
         if((moveEsquerda == true)  && (moveDireita == false)){
-            char.x = char.x - 2;
+            char.x = char.x - 20;
         }
         if((moveCima == true)  && (moveBaixo == false)){
-            char.y = char.y - 2;
+            char.y = char.y - 20;
         }
         if((moveDireita == true)  && (moveEsquerda == false)){
-            char.x = char.x + 2;
+            char.x = char.x + 20;
         }
         if((moveBaixo == true)  && (moveCima == false)){
-            char.y = char.y + 2;
+            char.y = char.y + 20;
         }
     }
     function renderiza(){
