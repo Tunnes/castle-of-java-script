@@ -49,6 +49,9 @@ function main(){
     //centralizar a câmera
 	camera.x = (mundoDoGame.width - camera.width)/2;
 	camera.y = (mundoDoGame.height - camera.height)/2;
+	//centralizar a câmera
+	char.x = (mundoDoGame.width - char.width)/2;
+	char.y = (mundoDoGame.height - char.height)/2;
 	
     // ELEMENTOS DE MOVIMENTAÇÃO DO JOGADOR ===============================================================
     var moveEsquerda = false;
@@ -128,6 +131,37 @@ function main(){
             camera.y = char.y + char.height - (camera.height * 0.75); 
         }
         
+        // AQUI ESTOU IMPONDO OS LIMITES PRO SUREALISMO (AQUELE LANCE DAS IMAGENS REPLICADAS)
+        // TIPO UM BORÃO NA TELA PRA ISSO VOU LIMITAR QUE A CAMERA E O PLAUER TRAPASSE O 
+        // TAMANHO DO CANVAS..
+        
+        // Camera:
+        if(camera.x < 0){
+            camera.x = 0;
+        }
+        if(camera.x + camera.width > mundoDoGame.width){
+            camera.x = mundoDoGame.width - camera.width;
+        }
+        if(camera.y < 0){
+            camera.y = 0;
+        }
+        if(camera.y + camera.height > mundoDoGame.height){
+            camera.y = mundoDoGame.height - camera.height;
+        }
+        // PERSONAGEM:
+        if(char.x < 0){
+            char.x = 0;
+        }
+        if(char.x + char.width > mundoDoGame.width){
+            char.x = mundoDoGame.width - char.width;
+        }
+        if(char.y < 0){
+            char.y = 0;
+        }
+        if(char.y + char.height > mundoDoGame.height){
+            char.y = mundoDoGame.height - char.height;
+        }
+        
     }
     
     //===================================================================================================
@@ -139,6 +173,7 @@ function main(){
             contexto.drawImage(spr.img, 0, 0, spr.width, spr.height, spr.x, spr.y, spr.width, spr.height);
         }
         contexto.restore();
+        // AQUI POSSO DEIXAR COISAS FIXAS.. AGORA AINDA NÃO MAN
         
         // contexto.drawImage(background, 0, 0, 1920, 1080, 0, 0, 1920, 1080);
         // contexto desenhe nomeDaImage, ondeElaComeça x e y, tamanhoDaImagem,  
