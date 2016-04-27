@@ -40,13 +40,16 @@ function main(){
         y: 0,
         width:  canvas.width,
         height: canvas.height,
-        
-        frontDireita:   function (){ return this.x + this.width  * 0.25 },
-        frontEsquerda:  function (){ return this.x + this.width  * 0.75 },
-        frontAlto:      function (){ return this.x + this.height * 0.25 },
-        frontBaixo:     function (){ return this.x + this.height * 0.75 }
+        frontEsquerda:  function (){ return this.x + (this.width * 0.25); },
+        frontAlto:      function (){ return this.y + (this.height * 0.25);},
+        frontDireita:   function (){ return this.x + (this.width * 0.75); },
+        frontBaixo:     function (){ return this.y + (this.height * 0.75);}
         
     };
+    //centralizar a câmera
+	camera.x = (mundoDoGame.width - camera.width)/2;
+	camera.y = (mundoDoGame.height - camera.height)/2;
+	
     // ELEMENTOS DE MOVIMENTAÇÃO DO JOGADOR ===============================================================
     var moveEsquerda = false;
     var moveDireita  = false;
@@ -99,19 +102,34 @@ function main(){
     }
     function atualiza(){
         // TENHO QUE TENTAR DEIXAR ISSO MAIS LIMPO.. E TALVEZ FUNCIONAL ;)
-        if((moveEsquerda == true)  && (moveDireita == false)){
-            char.x = char.x - 20;
+        if(moveEsquerda && !moveDireita){
+            char.x = char.x - 2;
         }
-        if((moveCima == true)  && (moveBaixo == false)){
-            char.y = char.y - 20;
+        if(moveCima && !moveBaixo){
+            char.y = char.y - 2;
         }
-        if((moveDireita == true)  && (moveEsquerda == false)){
-            char.x = char.x + 20;
+        if(moveDireita && !moveEsquerda){
+            char.x = char.x + 2;
         }
-        if((moveBaixo == true)  && (moveCima == false)){
-            char.y = char.y + 20;
+        if(moveBaixo && !moveCima){
+            char.y = char.y + 2;
         }
     }
+    // ATUALIZAÇÃO DA CAMERA EM FUNÇÃO DO PLAYER.
+        if(char.x < camera.frontEsquerda()){
+            camera.x = char.x - (camera.width * 0.25); 
+        }
+        if(char.x + char.width > camera.frontDireita()){
+            camera.x = char.x + char.width - (camera.width * 0.75); 
+        }
+        if(char.y < camera.frontAlto()){
+            camera.y = char.y - (camera.height * 0.25); 
+        }
+        if(char.y + char.height > camera.frontBaixo()){
+            camera.y = char.y + char.height - (camera.height * 0.75); 
+        }
+        
+    //===================================================================================================
     function renderiza(){
         contexto.save();
         contexto.translate(-camera.x, -camera.y);
