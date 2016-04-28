@@ -1,11 +1,13 @@
 function main(){
     //  FUNÇÕES-GENÉRICAS==========================================================================================
-    //  Uso funções genéricas pois o código esta extenso e repetitivo e eu não gosto disso..
+    //  Foi necessario a utilização de funções genéricas pois o código esta extenso e repetitivo e 
+    //  eu não gosto disso...
     //
         function movimento(tecla,boleano){
-            // Esta função é chamada quando alguma tecla é pressionada ou solta, ela recebe o objeto tecla e o
-            // boleano que executa o decremento ou incremento dos eixos x e y criando a movimentação do elemento.
-            //      Obs¹: O keyCode é equivalente a um código com ele faço a comparação em sentido horário.
+            // Esta função é chamada quando alguma tecla é pressionada ou solta, ela recebe o objeto 
+            // tecla e o boleano que executa o decremento ou incremento dos eixos x e y criando a 
+            // movimentação do elemento. O keyCode é equivalente a um código com ele faço a comparação 
+            // em sentido horário.
             //
             switch (tecla.keyCode){
                 case 37:
@@ -22,9 +24,7 @@ function main(){
                     break;
             }
         };
-    //  =====================================================================================================
-    
-    // Função main é a função de motor do game, nela mandarei quase todas as funções.
+    //  ===========================================================================================================
     var canvasAltura  = parseInt(document.getElementById("telaDoJogo").style.width); 
     var canvasLargura = parseInt(document.getElementById("telaDoJogo").style.height);
     
@@ -32,12 +32,16 @@ function main(){
     // VARIAVEL PARA ARMAZENAMENTO DO CONTEXTO DE RENDERIZAÇÃO.
     var contexto = canvas.getContext("2d");
     
-    //Recursos do Game
-    var background = new Image();
-    background.src = "../img/imgDeFundo.jpg";
-
-    var player = new Image();
-    player.src = "../img/player.png";
+    //  RECURSOS-DO-GAME===========================================================================================
+    //  Neste bloco estão os elementos que formam os recursos do game, como por exemplo o mapa, personagens e
+    //  inimigos, todos eles são armazenados "empilhados" em um vetor de objetos que futuramente sera renderizado.
+    //
+        var background = new Image();
+        background.src = "../img/imgDeFundo.jpg";
+        var player = new Image();
+        player.src = "../img/player.png";
+        
+    //  ===========================================================================================================
     
     //Objetos do game a serem renderizados.
     var sprites = [];
@@ -83,8 +87,8 @@ function main(){
     var moveDireita  = false;
     var moveCima     = false;
     var moveBaixo    = false;
-    window.addEventListener("keydown",function(tecla){movimento(tecla,true)});
-    window.addEventListener("keyup", function(tecla){movimento(tecla,false)});
+    window.addEventListener("keydown",function(tecla){movimento(tecla, true)});
+    window.addEventListener("keyup", function(tecla) {movimento(tecla,false)});
     
     //======================================================================================================
     function loop(){
