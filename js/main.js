@@ -1,10 +1,35 @@
 function main(){
+    //  FUNÇÕES-GENÉRICAS==========================================================================================
+    //  Uso funções genéricas pois o código esta extenso e repetitivo e eu não gosto disso..
+    //
+        function movimento(tecla,boleano){
+            // Esta função é chamada quando alguma tecla é pressionada ou solta, ela recebe o objeto tecla e o
+            // boleano que executa o decremento ou incremento dos eixos x e y criando a movimentação do elemento.
+            //      Obs¹: O keyCode é equivalente a um código com ele faço a comparação em sentido horário.
+            //
+            switch (tecla.keyCode){
+                case 37:
+                    moveEsquerda = boleano;
+                    break;
+                case 38:
+                    moveCima = boleano;
+                    break;
+                case 39:
+                    moveDireita = boleano;
+                    break;
+                case 40:
+                    moveBaixo = boleano;
+                    break;
+            }
+        };
+    //  =====================================================================================================
+    
     // Função main é a função de motor do game, nela mandarei quase todas as funções.
     var canvasAltura  = parseInt(document.getElementById("telaDoJogo").style.width); 
     var canvasLargura = parseInt(document.getElementById("telaDoJogo").style.height);
     
     var canvas   = document.getElementById("telaDoJogo");
-    // Variavel de contexto de renderização
+    // VARIAVEL PARA ARMAZENAMENTO DO CONTEXTO DE RENDERIZAÇÃO.
     var contexto = canvas.getContext("2d");
     
     //Recursos do Game
@@ -16,7 +41,7 @@ function main(){
     
     //Objetos do game a serem renderizados.
     var sprites = [];
-    var mundoDoGame = {
+    var mundoDoGame = { 
       img: background,
       x: 0,
       y: 0,
@@ -58,45 +83,9 @@ function main(){
     var moveDireita  = false;
     var moveCima     = false;
     var moveBaixo    = false;
-    window.addEventListener("keydown",function(evento){
-        // A JANELA ESPERANDO UM EVENTO NO CASO O PRESSIONAR DE UMA TECLA
-        // QUANDO ISSO É EXECUTADO EU VERIFICO PELO SISTEMA DE CODIGOS
-        // QUAL TECLA FOI PRESSIONADA, OS CODIGOS SEGUEM O SENTIDO HORARIO
-        // INICIANDO PELO NORMAL QUE É ESQUERDA.
-        var tecla = evento.keyCode;
-        switch (tecla) {
-            case 37:
-                moveEsquerda = true;
-                break;
-            case 38:
-                moveCima = true;
-                break;
-            case 39:
-                moveDireita = true;
-                break;
-            case 40:
-                moveBaixo = true;
-                break;
-        }
-    });
-    window.addEventListener("keyup",function(evento){
-        // A MESMA COISA POREM QUANDO POREM O USUARIO TIRAR O DEDO DA TECLA
-        var tecla = evento.keyCode;
-        switch (tecla) {
-            case 37:
-                moveEsquerda = false;
-                break;
-            case 38:
-                moveCima = false;
-                break;
-            case 39:
-                moveDireita = false;
-                break;
-            case 40:
-                moveBaixo = false;
-                break;
-        }
-    });
+    window.addEventListener("keydown",function(tecla){movimento(tecla,true)});
+    window.addEventListener("keyup", function(tecla){movimento(tecla,false)});
+    
     //======================================================================================================
     function loop(){
         window.requestAnimationFrame(loop,canvas);
