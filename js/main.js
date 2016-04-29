@@ -161,6 +161,7 @@ function main(){
     
     //===================================================================================================
     function renderiza(){
+        contexto.clearRect(0,0,canvas.width,canvas.height); // Para limpar a tela depois de cada atualização..
         contexto.save();
         contexto.translate(-camera.x, -camera.y);
         for(var i in sprites){
