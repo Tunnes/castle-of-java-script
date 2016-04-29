@@ -61,6 +61,7 @@ function main(){
         width: 64,
         height: 64
     };
+    
 
     sprites.push(mundoDoGame);
     sprites.push(player);
@@ -167,6 +168,7 @@ function main(){
         for(var i in sprites){
             var spr = sprites[i];
             contexto.drawImage(spr.img, 0, 0, spr.width, spr.height, spr.x, spr.y, spr.width, spr.height);
+            contexto.fillRect(700,1000,50,50);
         }
         contexto.restore();
         // AQUI POSSO DEIXAR COISAS FIXAS.. AGORA AINDA NÃO MAN
