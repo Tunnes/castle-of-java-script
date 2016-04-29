@@ -26,26 +26,33 @@ function main(){
             }
         };
     //  ===========================================================================================================
-    var canvasAltura  = parseInt(document.getElementById("telaDoJogo").style.width); 
-    var canvasLargura = parseInt(document.getElementById("telaDoJogo").style.height);
     
-    var canvas   = document.getElementById("telaDoJogo");
+    
     // VARIAVEL PARA ARMAZENAMENTO DO CONTEXTO DE RENDERIZAÇÃO.
-    var contexto = canvas.getContext("2d");
+    
     
     //  RECURSOS-DO-GAME===========================================================================================
     //  Neste bloco estão os elementos que formam os recursos do game, como por exemplo o mapa, personagens e
     //  inimigos, todos eles são armazenados "empilhados" em um vetor de objetos que futuramente sera renderizado.
-    //
-        var background = new Image();
-        background.src = "../img/imgDeFundo.jpg";
-        var player = new Image();
-        player.src = "../img/player.png";
+    //  Aqui também se encontram as principais variaveis como a variavel canvas que amazena o objeto canvas do DOM
+    //  e nosso contexto que é responsavel por dar vida a tela do canvas.. tipo tudo que você desenha nele e renderiza
+    //  sera exibido dentro do canvas lá no DOM.
+    
+        var canvas   = document.getElementById("telaDoJogo");   // Recebendo o objeto "canvas" do DOM.
+        var contexto = canvas.getContext("2d");                 // Indica que o contexto do canvas será em Bidimensional.
+        var sprites = [];                                       // Armazena todos os objetos a serem renderizados. 
         
+        var background = new Image();                           // Indica que background é um objeto imagem.  
+            background.src = "../img/imgDeFundo.jpg";           // Seta o atributo scr no caminho.
+        
+        var apenasUmR = new Image();                               // Indica que player é um objeto imagem. 
+            apenasUmR.src = "../img/player.png";                   // Seta o atributo scr no caminho.
+    
+           
     //  ===========================================================================================================
     
     //Objetos do game a serem renderizados.
-    var sprites = [];
+    
     var mundoDoGame = { 
       img: background,
       x: 0,
@@ -55,7 +62,7 @@ function main(){
     };
     
     var player = {
-        img: player,
+        img: apenasUmR,
         x: 0,
         y: 0,
         width: 64,
@@ -76,8 +83,8 @@ function main(){
         frontAlto:      function (){ return this.y + (this.height * 0.25);},
         frontDireita:   function (){ return this.x + (this.width * 0.75); },
         frontBaixo:     function (){ return this.y + (this.height * 0.75);}
-        
     };
+    
     //centralizar a câmera
 	camera.x = (mundoDoGame.width - camera.width)/2;
 	camera.y = (mundoDoGame.height - camera.height)/2;
@@ -87,8 +94,8 @@ function main(){
 	
     // ELEMENTOS DE MOVIMENTAÇÃO DO JOGADOR ===============================================================
     var moveEsquerda = false;
-    var moveDireita  = false;
     var moveCima     = false;
+    var moveDireita  = false;
     var moveBaixo    = false;
     window.addEventListener("keydown",function(tecla){movimento(tecla, true)});
     window.addEventListener("keyup", function(tecla) {movimento(tecla,false)});
@@ -168,7 +175,7 @@ function main(){
         for(var i in sprites){
             var spr = sprites[i];
             contexto.drawImage(spr.img, 0, 0, spr.width, spr.height, spr.x, spr.y, spr.width, spr.height);
-            contexto.fillRect(700,1000,50,50);
+            contexto.fillRect(700,1000,50,50); // teste inicial com plataformas.
         }
         contexto.restore();
         // AQUI POSSO DEIXAR COISAS FIXAS.. AGORA AINDA NÃO MAN
