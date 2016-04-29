@@ -2,6 +2,7 @@ function main(){
     //  FUNÇÕES-GENÉRICAS==========================================================================================
     //  Foi necessario a utilização de funções genéricas pois o código esta extenso e repetitivo e 
     //  eu não gosto disso...
+    //  Eric Pesquisar: https://github.com/raphamorim/origami.js/tree/master
     //
         function movimento(tecla,boleano){
             // Esta função é chamada quando alguma tecla é pressionada ou solta, ela recebe o objeto 
@@ -52,7 +53,8 @@ function main(){
       width: 1920,
       height: 1080
     };
-    var char = {
+    
+    var player = {
         img: player,
         x: 0,
         y: 0,
@@ -61,7 +63,7 @@ function main(){
     };
 
     sprites.push(mundoDoGame);
-    sprites.push(char);
+    sprites.push(player);
    
     
     var camera = {
@@ -79,8 +81,8 @@ function main(){
 	camera.x = (mundoDoGame.width - camera.width)/2;
 	camera.y = (mundoDoGame.height - camera.height)/2;
 	//centralizar a câmera
-	char.x = (mundoDoGame.width - char.width)/2;
-	char.y = (mundoDoGame.height - char.height)/2;
+	player.x = (mundoDoGame.width - player.width)/2;
+	player.y = (mundoDoGame.height - player.height)/2;
 	
     // ELEMENTOS DE MOVIMENTAÇÃO DO JOGADOR ===============================================================
     var moveEsquerda = false;
@@ -99,29 +101,29 @@ function main(){
     function atualiza(){
         // TENHO QUE TENTAR DEIXAR ISSO MAIS LIMPO.. E TALVEZ FUNCIONAL ;)
         if(moveEsquerda && !moveDireita){
-            char.x = char.x - 10;
+            player.x = player.x - 50;
         }
         if(moveCima && !moveBaixo){
-            char.y = char.y - 10;
+            player.y = player.y - 50;
         }
         if(moveDireita && !moveEsquerda){
-            char.x = char.x + 10;
+            player.x = player.x + 50;
         }
         if(moveBaixo && !moveCima){
-            char.y = char.y + 10;
+            player.y = player.y + 50;
         }
     // ATUALIZAÇÃO DA CAMERA EM FUNÇÃO DO PLAYER.
-        if(char.x < camera.frontEsquerda()){
-            camera.x = char.x - (camera.width * 0.25); 
+        if(player.x < camera.frontEsquerda()){
+            camera.x = player.x - (camera.width * 0.25); 
         }
-        if(char.x + char.width > camera.frontDireita()){
-            camera.x = char.x + char.width - (camera.width * 0.75); 
+        if(player.x + player.width > camera.frontDireita()){
+            camera.x = player.x + player.width - (camera.width * 0.75); 
         }
-        if(char.y < camera.frontAlto()){
-            camera.y = char.y - (camera.height * 0.25); 
+        if(player.y < camera.frontAlto()){
+            camera.y = player.y - (camera.height * 0.25); 
         }
-        if(char.y + char.height > camera.frontBaixo()){
-            camera.y = char.y + char.height - (camera.height * 0.75); 
+        if(player.y + player.height > camera.frontBaixo()){
+            camera.y = player.y + player.height - (camera.height * 0.75); 
         }
         
         // AQUI ESTOU IMPONDO OS LIMITES PRO SUREALISMO (AQUELE LANCE DAS IMAGENS REPLICADAS)
@@ -142,17 +144,17 @@ function main(){
             camera.y = mundoDoGame.height - camera.height;
         }
         // PERSONAGEM:
-        if(char.x < 0){
-            char.x = 0;
+        if(player.x < 0){
+            player.x = 0;
         }
-        if(char.x + char.width > mundoDoGame.width){
-            char.x = mundoDoGame.width - char.width;
+        if(player.x + player.width > mundoDoGame.width){
+            player.x = mundoDoGame.width - player.width;
         }
-        if(char.y < 0){
-            char.y = 0;
+        if(player.y < 0){
+            player.y = 0;
         }
-        if(char.y + char.height > mundoDoGame.height){
-            char.y = mundoDoGame.height - char.height;
+        if(player.y + player.height > mundoDoGame.height){
+            player.y = mundoDoGame.height - player.height;
         }
         
     }
