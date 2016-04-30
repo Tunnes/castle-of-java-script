@@ -104,16 +104,16 @@ function main(){
     function atualiza(){
         // TENHO QUE TENTAR DEIXAR ISSO MAIS LIMPO.. E TALVEZ FUNCIONAL ;)
         if(moveEsquerda && !moveDireita){
-            player.x = player.x - 50;
+            player.x = player.x - 20;
         }
         if(moveCima && !moveBaixo){
-            player.y = player.y - 50;
+            player.y = player.y - 20;
         }
         if(moveDireita && !moveEsquerda){
-            player.x = player.x + 50;
+            player.x = player.x + 20;
         }
         if(moveBaixo && !moveCima){
-            player.y = player.y + 50;
+            player.y = player.y + 20;
         }
     // ATUALIZAÇÃO DA CAMERA EM FUNÇÃO DO PLAYER.
         if(player.x < camera.frontEsquerda()){
@@ -132,33 +132,19 @@ function main(){
         // AQUI ESTOU IMPONDO OS LIMITES PRO SUREALISMO (AQUELE LANCE DAS IMAGENS REPLICADAS)
         // TIPO UM BORÃO NA TELA PRA ISSO VOU LIMITAR QUE A CAMERA E O PLAUER TRAPASSE O 
         // TAMANHO DO CANVAS..
+        // Limites teste
         
-        // Camera:
-        if(camera.x < 0){
-            camera.x = 0;
-        }
-        if(camera.x + camera.width > mundoDoGame.width){
-            camera.x = mundoDoGame.width - camera.width;
-        }
-        if(camera.y < 0){
-            camera.y = 0;
-        }
-        if(camera.y + camera.height > mundoDoGame.height){
-            camera.y = mundoDoGame.height - camera.height;
-        }
-        // PERSONAGEM:
-        if(player.x < 0){
-            player.x = 0;
-        }
-        if(player.x + player.width > mundoDoGame.width){
-            player.x = mundoDoGame.width - player.width;
-        }
-        if(player.y < 0){
-            player.y = 0;
-        }
-        if(player.y + player.height > mundoDoGame.height){
-            player.y = mundoDoGame.height - player.height;
-        }
+        //  LIMITES ==================================================================================
+        //  Para a implementação da limitação do mundo que criei, tive que fazer o uso de duas funções
+        //  simples por indicação de um grande amigo meu, com elas faço o uso da recursividade, já que
+        //  ambas rebem dois valores uma devolve o maior e a outra o menor.
+        //
+            camera.x = Math.max(0,Math.min(mundoDoGame.width - camera.width, camera.x));
+            camera.y = Math.max(0,Math.min(mundoDoGame.height - camera.height, camera.y));
+            
+            player.x = Math.max(0,Math.min(mundoDoGame.width - player.width, player.x));
+            player.y = Math.max(0,Math.min(mundoDoGame.height - player.height, player.y));
+        
         
     }
     
