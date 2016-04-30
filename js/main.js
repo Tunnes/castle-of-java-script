@@ -26,11 +26,6 @@ function main(){
             }
         };
     //  ===========================================================================================================
-    
-    
-    // VARIAVEL PARA ARMAZENAMENTO DO CONTEXTO DE RENDERIZAÇÃO.
-    
-    
     //  RECURSOS-DO-GAME===========================================================================================
     //  Neste bloco estão os elementos que formam os recursos do game, como por exemplo o mapa, personagens e
     //  inimigos, todos eles são armazenados "empilhados" em um vetor de objetos que futuramente sera renderizado.
@@ -47,8 +42,7 @@ function main(){
         
         var apenasUmR = new Image();                               // Indica que player é um objeto imagem. 
             apenasUmR.src = "../img/player.png";                   // Seta o atributo scr no caminho.
-    
-           
+    //        
     //  ===========================================================================================================
     
     //Objetos do game a serem renderizados.
@@ -104,6 +98,7 @@ function main(){
     function loop(){
         window.requestAnimationFrame(loop,canvas);
         atualiza();
+        
         renderiza();
     }
     function atualiza(){
