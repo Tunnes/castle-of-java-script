@@ -1,5 +1,5 @@
 function main(){
-    //  FUNÇÕES-GENÉRICAS==========================================================================================
+    //  FUNÇÕES GENÉRICAS ==========================================================================================
     //  Foi necessario a utilização de funções genéricas pois o código esta extenso e repetitivo e 
     //  eu não gosto disso...
     //  Eric Pesquisar: https://github.com/raphamorim/origami.js/tree/master
