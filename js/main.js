@@ -40,8 +40,8 @@ function main(){
         var background = new Image();                           // Indica que background é um objeto imagem.  
             background.src = "../img/imgDeFundo.jpg";           // Seta o atributo scr no caminho.
         
-        var apenasUmR = new Image();                               // Indica que player é um objeto imagem. 
-            apenasUmR.src = "../img/player.png";                   // Seta o atributo scr no caminho.
+        var apenasUmR = new Image();                            // Indica que player é um objeto imagem. 
+            apenasUmR.src = "../img/player.png";                // Seta o atributo scr no caminho.
     //        
     //  ===========================================================================================================
     
@@ -49,48 +49,47 @@ function main(){
     
     var mundoDoGame = { 
       img: background,
-      x: 0,
-      y: 0,
-      width: 1920,
-      height: 1080
+      pontoX: 0,
+      pontoY: 0,
+      largura: 1920,
+      altura: 1080
     };
     
     var player = {
         img: apenasUmR,
-        x: 0,
-        y: 0,
-        width: 64,
-        height: 64
+        pontoX: 0,
+        pontoY: 0,
+        largura: 64,
+        altura: 64
     };
+  
     
-
     sprites.push(mundoDoGame);
     sprites.push(player);
    
+   
     
     var camera = {
-        x: 0,
-        y: 0,
-        width:  canvas.width,
-        height: canvas.height,
-        frontEsquerda:  function (){ return this.x + (this.width * 0.25); },
-        frontAlto:      function (){ return this.y + (this.height * 0.25);},
-        frontDireita:   function (){ return this.x + (this.width * 0.75); },
-        frontBaixo:     function (){ return this.y + (this.height * 0.75);}
+        pontoX: 0,
+        pontoX: 0,
+        largura:  canvas.width,
+        altura: canvas.height,
+        frontEsquerda:  function (){ return this.pontoX + (this.largura * 0.25); },
+        frontAlto:      function (){ return this.pontoY + (this.altura * 0.25);},
+        frontDireita:   function (){ return this.pontoX + (this.largura * 0.75); },
+        frontBaixo:     function (){ return this.pontoY + (this.altura * 0.75);}
     };
     
     //centralizar a câmera
-	camera.x = (mundoDoGame.width - camera.width)/2;
-	camera.y = (mundoDoGame.height - camera.height)/2;
+	camera.pontoX = (mundoDoGame.largura - camera.largura)/2;
+	camera.pontoY = (mundoDoGame.altura - camera.altura)/2;
 	//centralizar a câmera
-	player.x = (mundoDoGame.width - player.width)/2;
-	player.y = (mundoDoGame.height - player.height)/2;
+	player.pontoX = (mundoDoGame.largura - player.largura)/2;
+	player.pontoY = (mundoDoGame.altura - player.altura)/2;
 	
     // ELEMENTOS DE MOVIMENTAÇÃO DO JOGADOR ===============================================================
-    var moveEsquerda = false;
-    var moveCima     = false;
-    var moveDireita  = false;
-    var moveBaixo    = false;
+    var moveEsquerda, moveCima, moveDireita, moveBaixo = false;
+    
     window.addEventListener("keydown",function(tecla){movimento(tecla, true)});
     window.addEventListener("keyup", function(tecla) {movimento(tecla,false)});
     
@@ -98,66 +97,61 @@ function main(){
     function loop(){
         window.requestAnimationFrame(loop,canvas);
         atualiza();
-        
         renderiza();
     }
     function atualiza(){
         // TENHO QUE TENTAR DEIXAR ISSO MAIS LIMPO.. E TALVEZ FUNCIONAL ;)
         if(moveEsquerda && !moveDireita){
-            player.x = player.x - 20;
+            player.pontoX = player.pontoX - 20;
         }
         if(moveCima && !moveBaixo){
-            player.y = player.y - 20;
+            player.pontoY = player.pontoY - 20;
         }
         if(moveDireita && !moveEsquerda){
-            player.x = player.x + 20;
+            player.pontoX = player.pontoX + 20;
         }
         if(moveBaixo && !moveCima){
-            player.y = player.y + 20;
+            player.pontoY = player.pontoY + 20;
         }
     // ATUALIZAÇÃO DA CAMERA EM FUNÇÃO DO PLAYER.
-        if(player.x < camera.frontEsquerda()){
-            camera.x = player.x - (camera.width * 0.25); 
+    
+        if(player.pontoX < camera.frontEsquerda()){
+            camera.pontoX = player.pontoX - (camera.largura * 0.25); 
         }
-        if(player.x + player.width > camera.frontDireita()){
-            camera.x = player.x + player.width - (camera.width * 0.75); 
+        if(player.pontoX + player.largura > camera.frontDireita()){
+            camera.pontoX = player.pontoX + player.largura - (camera.largura * 0.75); 
         }
-        if(player.y < camera.frontAlto()){
-            camera.y = player.y - (camera.height * 0.25); 
+        if(player.pontoY < camera.frontAlto()){
+            camera.pontoY = player.pontoY - (camera.altura * 0.25); 
         }
-        if(player.y + player.height > camera.frontBaixo()){
-            camera.y = player.y + player.height - (camera.height * 0.75); 
+        if(player.pontoY + player.altura > camera.frontBaixo()){
+            camera.pontoY = player.pontoY + player.altura - (camera.altura * 0.75); 
         }
-        
-        // AQUI ESTOU IMPONDO OS LIMITES PRO SUREALISMO (AQUELE LANCE DAS IMAGENS REPLICADAS)
-        // TIPO UM BORÃO NA TELA PRA ISSO VOU LIMITAR QUE A CAMERA E O PLAUER TRAPASSE O 
-        // TAMANHO DO CANVAS..
-        // Limites teste
         
         //  LIMITES ==================================================================================
         //  Para a implementação da limitação do mundo que criei, tive que fazer o uso de duas funções
         //  simples por indicação de um grande amigo meu, com elas faço o uso da recursividade, já que
         //  ambas rebem dois valores uma devolve o maior e a outra o menor.
         //
-            camera.x = Math.max(0,Math.min(mundoDoGame.width - camera.width, camera.x));
-            camera.y = Math.max(0,Math.min(mundoDoGame.height - camera.height, camera.y));
+            camera.pontoX = Math.max(0,Math.min(mundoDoGame.largura - camera.largura, camera.pontoX));
+            camera.pontoY = Math.max(0,Math.min(mundoDoGame.altura - camera.altura, camera.pontoY));
             
-            player.x = Math.max(0,Math.min(mundoDoGame.width - player.width, player.x));
-            player.y = Math.max(0,Math.min(mundoDoGame.height - player.height, player.y));
-        
-        
+            player.pontoX = Math.max(0,Math.min(mundoDoGame.largura - player.largura, player.pontoX));
+            player.pontoY = Math.max(0,Math.min(mundoDoGame.altura - player.altura, player.pontoY));
     }
     
     //===================================================================================================
     function renderiza(){
         contexto.clearRect(0,0,canvas.width,canvas.height); // Para limpar a tela depois de cada atualização..
         contexto.save();
-        contexto.translate(-camera.x, -camera.y);
+        contexto.translate(-camera.pontoX, -camera.pontoY);
         for(var i in sprites){
             var spr = sprites[i];
-            contexto.drawImage(spr.img, 0, 0, spr.width, spr.height, spr.x, spr.y, spr.width, spr.height);
+            contexto.drawImage(spr.img, 0, 0, spr.largura, spr.altura, spr.pontoX, spr.pontoY, spr.largura, spr.altura);
             contexto.fillRect(700,1000,50,50); // teste inicial com plataformas.
+            
         }
+        
         contexto.restore();
         // AQUI POSSO DEIXAR COISAS FIXAS.. AGORA AINDA NÃO MAN
         

@@ -14,7 +14,7 @@
         this.largura = largura;
         this.altura  = altura;
         this.cor     = cor;
-        this.visivel = visivel;
+        this.visivel = visivel || true;
     }
         // Estou usando o prototype apenas para atribuir um metodo a parede, que não é bem uma ação porem
         // este retorno desse metodo sera muito util para mim com o calculo de colisão.
@@ -31,4 +31,4 @@
         parede.prototype.centroY = function(){
             return this.pontoY + this.metadeDaAltura();
         }
-//  ==========================================================================================================    
+//  ==========================================================================================================
