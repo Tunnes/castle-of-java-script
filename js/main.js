@@ -39,10 +39,6 @@ function main(){
         
         var background = new Image();                           // Indica que background é um objeto imagem.  
             background.src = "../img/imgDeFundo.jpg";           // Seta o atributo scr no caminho.
-        
-        var apenasUmR = new Image();                            // Indica que player é um objeto imagem. 
-            apenasUmR.src = "../img/player.png";                // Seta o atributo scr no caminho.
-    //        
     //  ===========================================================================================================
     
     //Objetos do game a serem renderizados.
@@ -55,18 +51,19 @@ function main(){
       altura: 1080
     };
     
-    var player = {
-        img: apenasUmR,
-        pontoX: 0,
-        pontoY: 0,
-        largura: 64,
-        altura: 64
-    };
+    
+    var umOutroR    = new personagem(30,30,64,64,"../img/player.png");
+    var player      = new personagem(0,0,64,64,"../img/player.png")
+
   
+    var blocos = [];
+    var bloco1 = new parede(0,0,50,50,"red");
+    
+    blocos.push(bloco1);
     
     sprites.push(mundoDoGame);
     sprites.push(player);
-   
+    sprites.push(umOutroR);
    
     
     var camera = {
@@ -138,6 +135,8 @@ function main(){
             
             player.pontoX = Math.max(0,Math.min(mundoDoGame.largura - player.largura, player.pontoX));
             player.pontoY = Math.max(0,Math.min(mundoDoGame.altura - player.altura, player.pontoY));
+            
+            
     }
     
     //===================================================================================================
@@ -145,11 +144,16 @@ function main(){
         contexto.clearRect(0,0,canvas.width,canvas.height); // Para limpar a tela depois de cada atualização..
         contexto.save();
         contexto.translate(-camera.pontoX, -camera.pontoY);
+        
         for(var i in sprites){
             var spr = sprites[i];
             contexto.drawImage(spr.img, 0, 0, spr.largura, spr.altura, spr.pontoX, spr.pontoY, spr.largura, spr.altura);
             contexto.fillRect(700,1000,50,50); // teste inicial com plataformas.
-            
+        }
+        for(var i in blocos){
+            var bloc = blocos[i];
+            contexto.fillStyle = bloc.cor;
+            contexto.fillRect(bloc.pontoX, bloc.pontoY, bloc.largura, bloc.altura);
         }
         
         contexto.restore();

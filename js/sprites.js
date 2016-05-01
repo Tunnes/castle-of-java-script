@@ -4,10 +4,6 @@
 //  "classe" pai onde todos os outros elementos filhos iram ter os mesmos atributos.
 
 //  PAREDE ===================================================================================================
-    // A função contrutora "parede" serve para construir literalemente as paredes presentes no game,
-    // sendo que o this faz referencia ao que foi dado como parametro, assim quando eu quiser instanciar
-    // basta mandar um new, instanciar uma nova parede mandar aquele ponto e já era. 
-    //
     function parede(pontoX, pontoY, largura, altura, cor, visivel){             
         this.pontoX  = pontoX;
         this.pontoY  = pontoY;
@@ -17,7 +13,7 @@
         this.visivel = visivel || true;
     }
         // Estou usando o prototype apenas para atribuir um metodo a parede, que não é bem uma ação porem
-        // este retorno desse metodo sera muito util para mim com o calculo de colisão.
+        // este retorno desse metodo sera muito util com o calculo de colisão.
         //
         parede.prototype.metadeDaLargura = function(){
             return this.largura/2;
@@ -25,10 +21,33 @@
         parede.prototype.metadeDaAltura = function(){
             return this.altura/2;
         }
-        parede.prototype.centroX = function(){
+        parede.prototype.pontoCentralX = function(){
             return this.pontoX + this.metadeDaLargura();
         }
-        parede.prototype.centroY = function(){
+        parede.prototype.pontoCentralY = function(){
             return this.pontoY + this.metadeDaAltura();
         }
 //  ==========================================================================================================
+//  PERSONAGEM =============================================================================================== 
+    function personagem(pontoX, pontoY, largura, altura, enderecoImagem){
+        this.pontoX     = pontoX;
+        this.pontoY     = pontoY;
+        this.largura    = largura;
+        this.altura     = altura;
+        this.img        = new Image();
+        this.img.src    = enderecoImagem;
+        
+        personagem.prototype.metadeDaLargura = function(){
+            return this.largura/2;        
+        }
+        personagem.prototype.metadeDaAltura = function(){
+            return this.altura/2;
+        }
+        personagem.prototype.pontoCenralX = function(){
+            return this.pontoX + this.metadeDaLargura();
+        }
+        personagem.prototype.pontoCentralY = function(){
+            return this.pontoY + this.metadeDaAltura();
+        }
+    }
+   
