@@ -14,7 +14,6 @@
         this.cor     = cor;
         this.visivel = visivel || true;
     }
-        
         parede.prototype.metadeDaLargura = function(){
             return this.largura/2;
         }
@@ -36,7 +35,7 @@
         this.altura     = altura;
         this.img        = new Image();
         this.img.src    = enderecoImagem;
-        
+    }    
         personagem.prototype.metadeDaLargura = function(){
             return this.largura/2;        
         }
@@ -49,7 +48,7 @@
         personagem.prototype.pontoCentralY = function(){
             return this.pontoY + this.metadeDaAltura();
         }
-    }
+    
 //  =============================================================================================================
 //  MAPA ======================================================================================================== 
     function mapa(pontoX, pontoY, largura, altura, enderecoImagem, visivel){
@@ -62,3 +61,4 @@
         this.visivel    = visivel || true;
     }
 //  =============================================================================================================
+//  CAMERA ======================================================================================================
