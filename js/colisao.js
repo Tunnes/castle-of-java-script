@@ -9,7 +9,7 @@
 //  no decorrer do game, para isso tive que relembrar o funcionamento basico de catetos e adaptar
 //  minha "classe" de sprites para faciliar o calculo.
 
-//  FUNCÃO BLOQUEIA =====================================================================================
+//  FUNCÃO BLOQUEIA =========================================================================================
     // A função bloqueia recebe dois elementos e faz com que o elemento01 seja efetivamente bloqueado 
     // pelo elemento02.
     
