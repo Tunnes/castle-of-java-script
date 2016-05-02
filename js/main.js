@@ -15,7 +15,7 @@ function main(){
 //  ELEMENTOS PRINCIPAIS ===============================================================================================
     
     var mundoDoGame = new mapa(0, 0, 1920, 1080, "../img/imgDeFundo.jpg", true);
-    var umOutroR    = new personagem(30,30,64,64,"../img/player.png");
+    var umOutroR    = new personagem(300,500,64,64,"../img/player.png");
     var player      = new personagem(0,0,64,64,"../img/player.png");
     
         sprites.push(mundoDoGame);
@@ -111,7 +111,7 @@ function main(){
             player.pontoX = Math.max(0,Math.min(mundoDoGame.largura - player.largura, player.pontoX));
             player.pontoY = Math.max(0,Math.min(mundoDoGame.altura - player.altura, player.pontoY));
             
-            bloqueia(player,umOutroR);
+            bloqueia(umOutroR, player);
             
     }
     
