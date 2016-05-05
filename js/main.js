@@ -91,6 +91,11 @@ function main(){
         if(moveBaixo && !moveCima)       { player.pontoY = player.pontoY + 20;}
     };
     //======================================================================================================
+    //TESTE COM SPIRTES
+    function desenhaCarinha(){
+        
+    }
+    //======================================================================================================
     function loop(){
         window.requestAnimationFrame(loop,canvas);
         atualiza();
@@ -111,7 +116,7 @@ function main(){
             player.pontoX = Math.max(0,Math.min(mundoDoGame.largura - player.largura, player.pontoX));
             player.pontoY = Math.max(0,Math.min(mundoDoGame.altura - player.altura, player.pontoY));
             
-            bloqueia(umOutroR, player);
+            bloqueia(umOutroR,player);
             
     }
     
