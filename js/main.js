@@ -62,7 +62,7 @@ function main(){
     
     window.addEventListener("keydown",function(tecla){movimento(tecla, true)});
     window.addEventListener("keyup", function(tecla) {movimento(tecla,false)});
-    
+   
     function movimento(tecla,boleano){
     // Esta função é chamada quando alguma tecla é pressionada ou solta, ela recebe o objeto 
     // tecla e o boleano que executa o decremento ou incremento dos eixos x e y criando a 
@@ -71,31 +71,51 @@ function main(){
             
         switch (tecla.keyCode){
             case 37:
-                moveEsquerda = boleano;
+                moveEsquerda         = boleano;
+                player.olharEsquerda = boleano;
+                spriteMovimento()
                 break;
             case 38:
-                moveCima = boleano;
+                moveCima             = boleano;
+                player.olharCima     = boleano;
                 break;
             case 39:
-                moveDireita = boleano;
+                moveDireita          = boleano;
+                player.olharDireita  = boleano; 
                 break;
             case 40:
-                moveBaixo = boleano;
+                moveBaixo         = boleano;
+                player.olharBaixo = boleano;
                 break;
         }
+    // Consição para verificar o contador do player.
+    function spriteMovimento(){
+        if(player.contDeFrame == player.ultiFrame){
+            player.corteX = 0;
+            player.contDeFrame = 0;
+            player.proxFrame = player.veloDeFrame;
+        }else if(player.contDeFrame == player.proxFrame){
+            if(player.corteY == player.pontoDeInicio.y){ 
+                player.corteX = 0; // O 150 representa o corte no sprite que eu quero.
+            } 
+            else if(player.corteY == 150){ 
+                player.corteX += player.largura;
+            }
+            player.corteY == 150;
+            player.proxFrame += player.veloDeFrame;
+        }
+            player.contDeFrame += 1 ;
+    }
+
     };
     function atualizaPosicaoDoPlayer(){
-        if(moveEsquerda && !moveDireita) { player.pontoX = player.pontoX - 20;}
-        if(moveCima && !moveBaixo)       { player.pontoY = player.pontoY - 20;}
-        if(moveDireita && !moveEsquerda) { player.pontoX = player.pontoX + 20;}
-        if(moveBaixo && !moveCima)       { player.pontoY = player.pontoY + 20;}
+        if(moveEsquerda && !moveDireita) { player.pontoX = player.pontoX - 20; }
+        if(moveCima && !moveBaixo)       { player.pontoY = player.pontoY - 20; }
+        if(moveDireita && !moveEsquerda) { player.pontoX = player.pontoX + 20; }
+        if(moveBaixo && !moveCima)       { player.pontoY = player.pontoY + 20; }
     };
     //======================================================================================================
-    //TESTE COM SPIRTES
-    function desenhaCarinha(){
-        
-    }
-    //======================================================================================================
+    
     function loop(){
         window.requestAnimationFrame(loop,canvas);
         atualiza();

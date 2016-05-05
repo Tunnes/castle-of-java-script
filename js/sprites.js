@@ -28,7 +28,7 @@
         }
 //  ==========================================================================================================
 //  PERSONAGEM =============================================================================================== 
-    function personagem(pontoX, pontoY, largura, altura, enderecoImagem, corteX, corteY, olharEsquerda, olharDireita, olharCima, olharBaixo){
+    function personagem(pontoX, pontoY, largura, altura, enderecoImagem, corteX, corteY){
         this.pontoX     = pontoX;
         this.pontoY     = pontoY;
         this.largura    = largura;
@@ -36,19 +36,22 @@
         this.img        = new Image(); 
         this.img.src    = enderecoImagem;
         // Teste com sprites.
-        this.corteX     = corteX;
-        this.corteY     = corteX;  
-        this.olharEsquerda = olharEsquerda; 
-        this.olharDireita = olharDireita;
-        this.olharCima = olharCima;
-        this.olharBaixo = olharBaixo;
-        this.contDeFrame = 0;
-        this.veloDeFrame = 15;
-        this.proxFrame = 0;
-        this.ultiFrame = 90;
-        this.pontoDeInicio = {
+        this.corteX         = corteX;
+        this.corteY         = corteX;  
+        this.olharEsquerda  = false; 
+        this.olharDireita   = false;
+        this.olharCima      = false;
+        this.olharBaixo     = false;
+        this.contDeFrame    = 0;
+        this.veloDeFrame    = 15;
+        this.proxFrame      = 0;
+        this.ultiFrame      = 90;
+        this.pontoDeInicio  = {
              esquerda: 0,
-             direita: 0
+             direita: 0,
+             cima: 0,
+             baixo: 0,
+             y: 0,
         };
         
     }    
