@@ -9,14 +9,15 @@ function main(){
     
     var canvas      = document.getElementById("telaDoJogo");   // Recebendo o objeto "canvas" do DOM.
     var contexto    = canvas.getContext("2d");                 // Indica que o contexto do canvas será em Bidimensional.
-    var sprites     = [];                                       // Armazena todos os objetos a serem renderizados. 
+    var sprites     = [];                                       // Armazena todos os objetos a serem renderizados.
+    
         
 //  ====================================================================================================================
 //  ELEMENTOS PRINCIPAIS ===============================================================================================
     
     var mundoDoGame = new mapa(0, 0, 1920, 1080, "../img/imgDeFundo.jpg", true);
     var umOutroR    = new personagem(300,500,64,64,"../img/player.png");
-    var player      = new personagem(0,0,64,64,"../img/player.png");
+    var player      = new personagem(0,0,64,64,"../img/player.png",89,0);
     
         sprites.push(mundoDoGame);
         sprites.push(player);
@@ -72,40 +73,19 @@ function main(){
         switch (tecla.keyCode){
             case 37:
                 moveEsquerda         = boleano;
-                player.olharEsquerda = boleano;
-                spriteMovimento()
                 break;
             case 38:
                 moveCima             = boleano;
-                player.olharCima     = boleano;
                 break;
             case 39:
                 moveDireita          = boleano;
-                player.olharDireita  = boleano; 
                 break;
             case 40:
                 moveBaixo         = boleano;
-                player.olharBaixo = boleano;
                 break;
         }
     // Consição para verificar o contador do player.
-    function spriteMovimento(){
-        if(player.contDeFrame == player.ultiFrame){
-            player.corteX = 0;
-            player.contDeFrame = 0;
-            player.proxFrame = player.veloDeFrame;
-        }else if(player.contDeFrame == player.proxFrame){
-            if(player.corteY == player.pontoDeInicio.y){ 
-                player.corteX = 0; // O 150 representa o corte no sprite que eu quero.
-            } 
-            else if(player.corteY == 150){ 
-                player.corteX += player.largura;
-            }
-            player.corteY == 150;
-            player.proxFrame += player.veloDeFrame;
-        }
-            player.contDeFrame += 1 ;
-    }
+  
 
     };
     function atualizaPosicaoDoPlayer(){

@@ -37,23 +37,7 @@
         this.img.src    = enderecoImagem;
         // Teste com sprites.
         this.corteX         = corteX;
-        this.corteY         = corteX;  
-        this.olharEsquerda  = false; 
-        this.olharDireita   = false;
-        this.olharCima      = false;
-        this.olharBaixo     = false;
-        this.contDeFrame    = 0;
-        this.veloDeFrame    = 15;
-        this.proxFrame      = 0;
-        this.ultiFrame      = 90;
-        this.pontoDeInicio  = {
-             esquerda: 0,
-             direita: 0,
-             cima: 0,
-             baixo: 0,
-             y: 0,
-        };
-        
+        this.corteY         = corteY;  
     }    
         personagem.prototype.metadeDaLargura = function(){
             return this.largura/2;        
