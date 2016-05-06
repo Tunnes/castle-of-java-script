@@ -17,10 +17,10 @@ function main(){
     
     var mundoDoGame = new mapa(0, 0, 1920, 1080, "../img/imgDeFundo.jpg", true);
     var umOutroR    = new personagem(300,500,64,64,"../img/player.png");
-    var player      = new personagem(0,0,64,64,"../img/player.png",89,0);
+    var player      = new personagem(0,0,64,64,"../img/player-agora-sim.png",0,0);
     
         sprites.push(mundoDoGame);
-        sprites.push(player);
+        //sprites.push(player);
         sprites.push(umOutroR);
    
 //  ====================================================================================================================    
@@ -85,11 +85,25 @@ function main(){
                 break;
         }
     // Consição para verificar o contador do player.
+   
   
 
     };
+     function moveSpriteDireita(){
+        console.log(player.corteX)
+        if(player.frameAtual == player.frame){
+            if(player.corteX == player.largura*3){
+                    player.corteX = 0;    
+            }else{
+                player.corteX += player.largura;    
+            }
+            player.frameAtual = 0;
+        }else{
+            player.frameAtual += 1;
+        }
+    };
     function atualizaPosicaoDoPlayer(){
-        if(moveEsquerda && !moveDireita) { player.pontoX = player.pontoX - 20; }
+        if(moveEsquerda && !moveDireita) { player.pontoX = player.pontoX - 20; moveSpriteDireita();}
         if(moveCima && !moveBaixo)       { player.pontoY = player.pontoY - 20; }
         if(moveDireita && !moveEsquerda) { player.pontoX = player.pontoX + 20; }
         if(moveBaixo && !moveCima)       { player.pontoY = player.pontoY + 20; }
@@ -128,7 +142,9 @@ function main(){
         
         for(var i in sprites){
             var spr = sprites[i];
+            contexto.drawImage(player.img, player.corteX, player.corteY, player.largura, player.altura, player.pontoX, player.pontoY, player.largura, player.altura);    
             contexto.drawImage(spr.img, 0, 0, spr.largura, spr.altura, spr.pontoX, spr.pontoY, spr.largura, spr.altura);
+            
         }
         contexto.restore();
         // AQUI POSSO DEIXAR COISAS FIXAS.. AGORA AINDA NÃO MAN

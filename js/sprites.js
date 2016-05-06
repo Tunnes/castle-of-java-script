@@ -37,7 +37,10 @@
         this.img.src    = enderecoImagem;
         // Teste com sprites.
         this.corteX         = corteX;
-        this.corteY         = corteY;  
+        this.corteY         = corteY; 
+        this.frame          =  2;
+        this.frameAtual     =  0;
+        
     }    
         personagem.prototype.metadeDaLargura = function(){
             return this.largura/2;        
