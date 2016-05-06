@@ -84,10 +84,6 @@ function main(){
                 moveBaixo         = boleano;
                 break;
         }
-    // Consição para verificar o contador do player.
-   
-  
-
     };
      function moveSpriteDireita(){
         console.log(player.corteX)

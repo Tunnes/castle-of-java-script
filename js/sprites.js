@@ -38,7 +38,7 @@
         // Teste com sprites.
         this.corteX         = corteX;
         this.corteY         = corteY; 
-        this.frame          =  2;
+        this.frame          =  4;
         this.frameAtual     =  0;
         
     }    
