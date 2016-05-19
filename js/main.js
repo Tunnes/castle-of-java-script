@@ -14,7 +14,7 @@ function main(){
 //  ELEMENTOS PRINCIPAIS ===============================================================================================
     
     var mundoDoGame = new Mapa(0, 0, 2500, 2500, "../img/primeira.jpg", true);
-    var umOutroR    = new Personagem(300,500,17,20,"../img/min.png");
+    var umOutroR    = new Inimigo(300,500,77,77,"../img/inimigo-vampiro.png",0,0);
     var player      = new Personagem(0,0,96,52,"../img/player-patrick.png",0,0);
     var camera = new Camera(0,0,canvas.width,canvas.height);
         sprites.push(mundoDoGame);
@@ -90,9 +90,10 @@ function main(){
         renderiza();
     }
     function atualiza(){
-        
+        umOutroR.seguir(player.pontoX,player.pontoY);
         atualizaPosicaoDoPlayer();  // Atualiza a posição do jogador.
-        camera.atualizaPosicaoDaCamera(player);  // Atualiza a posição da camera.
+        camera.atualizaPosicao(player);  // Atualiza a posição da camera.
+        
         
         //  LIMITES ==================================================================================
         //  Para a implementação da limitação do mundo que criei, tive que fazer o uso de duas funções
@@ -122,6 +123,8 @@ function main(){
             
             
             contexto.drawImage(player.img, player.corteX, player.corteY, player.largura, player.altura, player.pontoX, player.pontoY, player.largura, player.altura);    
+            contexto.drawImage(umOutroR.img, umOutroR.corteX, umOutroR.corteY, umOutroR.largura, umOutroR.altura, umOutroR.pontoX, umOutroR.pontoY, umOutroR.largura, umOutroR.altura);    
+           
             contexto.drawImage(spr.img, 0, 0, spr.largura, spr.altura, spr.pontoX, spr.pontoY, spr.largura, spr.altura);
             
         }
