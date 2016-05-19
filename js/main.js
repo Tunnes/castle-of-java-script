@@ -16,7 +16,7 @@ function main(){
     
     var mundoDoGame = new mapa(0, 0, 2500, 2500, "../img/primeira.jpg", true);
     var umOutroR    = new Personagem(300,500,17,20,"../img/min.png");
-    var player      = new Personagem(0,0,96,52,"../img/teste.png",0,0);
+    var player      = new Personagem(0,0,96,52,"../img/player-patrick.png",0,0);
         
         sprites.push(mundoDoGame);
         //sprites.push(player);
@@ -88,25 +88,25 @@ function main(){
         if(moveEsquerda && !moveDireita && !moveCima && !moveCima){
             player.atualizaSprite(53,96,53);
             player.pontoX = player.pontoX - 5; 
-            player.moveSpriteDireita();
+            player.moveSprite();
         }
         
         if(moveCima && !moveBaixo && !moveDireita && !moveEsquerda){
             player.atualizaSprite(96,53,106);
             player.pontoY = player.pontoY - 5;
-            player.moveSpriteDireita();
+            player.moveSprite();
         }
         
         if(moveDireita && !moveEsquerda && !moveBaixo && !moveCima) {
             player.atualizaSprite(53,96,0);
             player.pontoX = player.pontoX + 5; 
-            player.moveSpriteDireita();    
+            player.moveSprite();    
         }
         
         if(moveBaixo && !moveCima && !moveDireita && !moveEsquerda){
             player.atualizaSprite(96,53,202);
             player.pontoY = player.pontoY + 5; 
-            player.moveSpriteDireita();    
+            player.moveSprite();    
         }
     };
     //======================================================================================================
