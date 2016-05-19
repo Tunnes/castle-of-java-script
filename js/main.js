@@ -17,7 +17,7 @@ function main(){
     var mundoDoGame = new mapa(0, 0, 2500, 2500, "../img/primeira.jpg", true);
     var umOutroR    = new Personagem(300,500,17,20,"../img/min.png");
     var player      = new Personagem(0,0,96,52,"../img/teste.png",0,0);
-    
+        
         sprites.push(mundoDoGame);
         //sprites.push(player);
         sprites.push(umOutroR);
@@ -60,7 +60,7 @@ function main(){
     var moveEsquerda, moveCima, moveDireita, moveBaixo = false;
     
     window.addEventListener("keydown",function(tecla){movimento(tecla, true)});
-    window.addEventListener("keyup", function(tecla) {movimento(tecla,false); player.corteX = 0;});
+    window.addEventListener("keyup", function(tecla) {movimento(tecla, false);player.corteX = 0;});
    
     function movimento(tecla,boleano){
     // Esta função é chamada quando alguma tecla é pressionada ou solta, ela recebe o objeto 
@@ -85,27 +85,29 @@ function main(){
     };
             
     function atualizaPosicaoDoPlayer(){
-
-        if(moveEsquerda && !moveDireita){
+        if(moveEsquerda && !moveDireita && !moveCima && !moveCima){
+            player.atualizaSprite(53,96,53);
             player.pontoX = player.pontoX - 5; 
             player.moveSpriteDireita();
         }
         
-        if(moveCima && !moveBaixo){
-            player.pontoY = player.pontoY - 5; 
+        if(moveCima && !moveBaixo && !moveDireita && !moveEsquerda){
+            player.atualizaSprite(96,53,106);
+            player.pontoY = player.pontoY - 5;
             player.moveSpriteDireita();
         }
         
-        if(moveDireita && !moveEsquerda) {
+        if(moveDireita && !moveEsquerda && !moveBaixo && !moveCima) {
+            player.atualizaSprite(53,96,0);
             player.pontoX = player.pontoX + 5; 
             player.moveSpriteDireita();    
         }
         
-        if(moveBaixo && !moveCima){
+        if(moveBaixo && !moveCima && !moveDireita && !moveEsquerda){
+            player.atualizaSprite(96,53,202);
             player.pontoY = player.pontoY + 5; 
             player.moveSpriteDireita();    
         }
-        
     };
     //======================================================================================================
     

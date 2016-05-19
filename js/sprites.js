@@ -46,6 +46,9 @@
         Personagem.prototype.pontoCentralY = function(){
             return this.pontoY + this.metadeDaAltura();
         }
+        Personagem.prototype.atualizaSprite = function(altura,largura,corteY){
+            return this.altura = altura, this.largura = largura, this.corteY = corteY; 
+        }
         Personagem.prototype.moveSpriteDireita = function(){
             console.log(this.corteX);
             if(this.frameAtual == this.frame){
