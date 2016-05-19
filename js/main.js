@@ -1,5 +1,4 @@
 function main(){
-
 //  RECURSOS-DO-GAME===================================================================================================
 //  Neste bloco estão os elementos que formam os recursos do game, como por exemplo o mapa, personagens e
 //  inimigos, todos eles são armazenados "empilhados" em um vetor de objetos que futuramente sera renderizado.
@@ -14,41 +13,15 @@ function main(){
 //  ====================================================================================================================
 //  ELEMENTOS PRINCIPAIS ===============================================================================================
     
-    var mundoDoGame = new mapa(0, 0, 2500, 2500, "../img/primeira.jpg", true);
+    var mundoDoGame = new Mapa(0, 0, 2500, 2500, "../img/primeira.jpg", true);
     var umOutroR    = new Personagem(300,500,17,20,"../img/min.png");
     var player      = new Personagem(0,0,96,52,"../img/player-patrick.png",0,0);
-        
+    var camera = new Camera(0,0,canvas.width,canvas.height);
         sprites.push(mundoDoGame);
         //sprites.push(player);
         sprites.push(umOutroR);
    
 //  ====================================================================================================================    
-//  CAMERA DO GAME =====================================================================================================
-    var camera = {
-        pontoX: 0,
-        pontoX: 0,
-        largura:  canvas.width,
-        altura: canvas.height,
-        frontEsquerda:  function (){ return this.pontoX + (this.largura * 0.25); },
-        frontAlto:      function (){ return this.pontoY + (this.altura * 0.25);},
-        frontDireita:   function (){ return this.pontoX + (this.largura * 0.75); },
-        frontBaixo:     function (){ return this.pontoY + (this.altura * 0.75);}
-        };
-        
-    function atualizaPosicaoDaCamera(){
-        if(player.pontoX < camera.frontEsquerda()){ 
-            camera.pontoX = player.pontoX - (camera.largura * 0.25);}
-        
-        if(player.pontoX + player.largura > camera.frontDireita()){
-            camera.pontoX = player.pontoX + player.largura - (camera.largura * 0.75);}
-            
-        if(player.pontoY < camera.frontAlto()){
-            camera.pontoY = player.pontoY - (camera.altura * 0.25);}
-            
-        if(player.pontoY + player.altura > camera.frontBaixo()){
-            camera.pontoY = player.pontoY + player.altura - (camera.altura * 0.75);}
-    };
-    
     camera.pontoX = (mundoDoGame.largura - camera.largura)/2;
 	camera.pontoY = (mundoDoGame.altura - camera.altura)/2;
 	
@@ -85,7 +58,7 @@ function main(){
     };
             
     function atualizaPosicaoDoPlayer(){
-        if(moveEsquerda && !moveDireita && !moveCima && !moveCima){
+        if(moveEsquerda && !moveDireita && !moveCima && !moveBaixo){
             player.atualizaSprite(53,96,53);
             player.pontoX = player.pontoX - 5; 
             player.moveSprite();
@@ -103,7 +76,7 @@ function main(){
             player.moveSprite();    
         }
         
-        if(moveBaixo && !moveCima && !moveDireita && !moveEsquerda){
+        if(moveBaixo && !moveEsquerda && !moveCima && !moveDireita){
             player.atualizaSprite(96,53,202);
             player.pontoY = player.pontoY + 5; 
             player.moveSprite();    
@@ -119,7 +92,7 @@ function main(){
     function atualiza(){
         
         atualizaPosicaoDoPlayer();  // Atualiza a posição do jogador.
-        atualizaPosicaoDaCamera();  // Atualiza a posição da camera.
+        camera.atualizaPosicaoDaCamera(player);  // Atualiza a posição da camera.
         
         //  LIMITES ==================================================================================
         //  Para a implementação da limitação do mundo que criei, tive que fazer o uso de duas funções
