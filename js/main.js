@@ -10,14 +10,13 @@ function main(){
     var canvas      = document.getElementById("telaDoJogo");   // Recebendo o objeto "canvas" do DOM.
     var contexto    = canvas.getContext("2d");                 // Indica que o contexto do canvas será em Bidimensional.
     var sprites     = [];                                       // Armazena todos os objetos a serem renderizados.
-    
         
 //  ====================================================================================================================
 //  ELEMENTOS PRINCIPAIS ===============================================================================================
     
-    var mundoDoGame = new mapa(0, 0, 1920, 1080, "../img/imgDeFundo.jpg", true);
-    var umOutroR    = new personagem(300,500,64,64,"../img/player.png");
-    var player      = new personagem(0,0,64,64,"../img/player-agora-sim.png",0,0);
+    var mundoDoGame = new mapa(0, 0, 2500, 2500, "../img/primeira.jpg", true);
+    var umOutroR    = new Personagem(300,500,17,20,"../img/min.png");
+    var player      = new Personagem(0,0,96,52,"../img/teste.png",0,0);
     
         sprites.push(mundoDoGame);
         //sprites.push(player);
@@ -25,7 +24,6 @@ function main(){
    
 //  ====================================================================================================================    
 //  CAMERA DO GAME =====================================================================================================
-
     var camera = {
         pontoX: 0,
         pontoX: 0,
@@ -62,7 +60,7 @@ function main(){
     var moveEsquerda, moveCima, moveDireita, moveBaixo = false;
     
     window.addEventListener("keydown",function(tecla){movimento(tecla, true)});
-    window.addEventListener("keyup", function(tecla) {movimento(tecla,false)});
+    window.addEventListener("keyup", function(tecla) {movimento(tecla,false); player.corteX = 0;});
    
     function movimento(tecla,boleano){
     // Esta função é chamada quando alguma tecla é pressionada ou solta, ela recebe o objeto 
@@ -72,37 +70,42 @@ function main(){
             
         switch (tecla.keyCode){
             case 37:
-                moveEsquerda         = boleano;
+                moveEsquerda = boleano;
                 break;
             case 38:
-                moveCima             = boleano;
+                moveCima     = boleano;
                 break;
             case 39:
-                moveDireita          = boleano;
+                moveDireita  = boleano;
                 break;
             case 40:
-                moveBaixo         = boleano;
+                moveBaixo    = boleano;
                 break;
         }
     };
-     function moveSpriteDireita(){
-        console.log(player.corteX)
-        if(player.frameAtual == player.frame){
-            if(player.corteX == player.largura*3){
-                    player.corteX = 0;    
-            }else{
-                player.corteX += player.largura;    
-            }
-            player.frameAtual = 0;
-        }else{
-            player.frameAtual += 1;
-        }
-    };
+            
     function atualizaPosicaoDoPlayer(){
-        if(moveEsquerda && !moveDireita) { player.pontoX = player.pontoX - 20; moveSpriteDireita();}
-        if(moveCima && !moveBaixo)       { player.pontoY = player.pontoY - 20; }
-        if(moveDireita && !moveEsquerda) { player.pontoX = player.pontoX + 20; }
-        if(moveBaixo && !moveCima)       { player.pontoY = player.pontoY + 20; }
+
+        if(moveEsquerda && !moveDireita){
+            player.pontoX = player.pontoX - 5; 
+            player.moveSpriteDireita();
+        }
+        
+        if(moveCima && !moveBaixo){
+            player.pontoY = player.pontoY - 5; 
+            player.moveSpriteDireita();
+        }
+        
+        if(moveDireita && !moveEsquerda) {
+            player.pontoX = player.pontoX + 5; 
+            player.moveSpriteDireita();    
+        }
+        
+        if(moveBaixo && !moveCima){
+            player.pontoY = player.pontoY + 5; 
+            player.moveSpriteDireita();    
+        }
+        
     };
     //======================================================================================================
     
@@ -112,6 +115,7 @@ function main(){
         renderiza();
     }
     function atualiza(){
+        
         atualizaPosicaoDoPlayer();  // Atualiza a posição do jogador.
         atualizaPosicaoDaCamera();  // Atualiza a posição da camera.
         
@@ -126,10 +130,12 @@ function main(){
             player.pontoX = Math.max(0,Math.min(mundoDoGame.largura - player.largura, player.pontoX));
             player.pontoY = Math.max(0,Math.min(mundoDoGame.altura - player.altura, player.pontoY));
             
+            /*global bloqueia*/
             bloqueia(umOutroR,player);
             
     }
     
+        
     //===================================================================================================
     function renderiza(){
         contexto.clearRect(0,0,canvas.width,canvas.height); // Para limpar a tela depois de cada atualização..
@@ -138,6 +144,8 @@ function main(){
         
         for(var i in sprites){
             var spr = sprites[i];
+            
+            
             contexto.drawImage(player.img, player.corteX, player.corteY, player.largura, player.altura, player.pontoX, player.pontoY, player.largura, player.altura);    
             contexto.drawImage(spr.img, 0, 0, spr.largura, spr.altura, spr.pontoX, spr.pontoY, spr.largura, spr.altura);
             

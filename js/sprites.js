@@ -1,12 +1,5 @@
-//  Na classe "sprites.js" contive os padrões de diversos elementos para a criação de elementos 
-//  presentes no game, uso pois o codigo fica mais enxuto e simples sendo que dentro destes moldes
-//  fiz o uso de atributos e funções com o mesmo intuito.. De uma certa forma segue a ideia de uma
-//  "classe" pai onde todos os outros elementos filhos iram ter os mesmos atributos.
-//          Estou usando o prototype apenas para atribuir um metodo a parede, que não é bem uma ação porem
-//          este retorno desse metodo sera muito util com o calculo de colisão.
-
 //  PAREDE ===================================================================================================
-    function parede(pontoX, pontoY, largura, altura, cor, visivel){             
+    var Parede = function(pontoX, pontoY, largura, altura, cor, visivel){             
         this.pontoX  = pontoX;
         this.pontoY  = pontoY;
         this.largura = largura;
@@ -14,47 +7,137 @@
         this.cor     = cor;
         this.visivel = visivel || true;
     }
-        parede.prototype.metadeDaLargura = function(){
+        Parede.prototype.metadeDaLargura = function(){
             return this.largura/2;
         }
-        parede.prototype.metadeDaAltura = function(){
+        Parede.prototype.metadeDaAltura = function(){
             return this.altura/2;
         }
-        parede.prototype.pontoCentralX = function(){
+        Parede.prototype.pontoCentralX = function(){
             return this.pontoX + this.metadeDaLargura();
         }
-        parede.prototype.pontoCentralY = function(){
+        Parede.prototype.pontoCentralY = function(){
             return this.pontoY + this.metadeDaAltura();
         }
 //  ==========================================================================================================
 //  PERSONAGEM =============================================================================================== 
-    function personagem(pontoX, pontoY, largura, altura, enderecoImagem, corteX, corteY){
+    var Personagem = function(pontoX, pontoY, largura, altura, enderecoImagem, corteX, corteY){
         this.pontoX     = pontoX;
         this.pontoY     = pontoY;
         this.largura    = largura;
         this.altura     = altura;
         this.img        = new Image(); 
         this.img.src    = enderecoImagem;
-        // Teste com sprites.
-        this.corteX         = corteX;
-        this.corteY         = corteY; 
-        this.frame          =  4;
-        this.frameAtual     =  0;
+        this.corteX     = corteX;
+        this.corteY     = corteY; 
+        this.frame      =  4;
+        this.frameAtual =  0;
         
     }    
-        personagem.prototype.metadeDaLargura = function(){
+        Personagem.prototype.metadeDaLargura = function(){
             return this.largura/2;        
         }
-        personagem.prototype.metadeDaAltura = function(){
+        Personagem.prototype.metadeDaAltura = function(){
             return this.altura/2;
         }
-        personagem.prototype.pontoCentralX = function(){
+        Personagem.prototype.pontoCentralX = function(){
             return this.pontoX + this.metadeDaLargura();
         }
-        personagem.prototype.pontoCentralY = function(){
+        Personagem.prototype.pontoCentralY = function(){
             return this.pontoY + this.metadeDaAltura();
         }
-    
+        Personagem.prototype.moveSpriteDireita = function(){
+            console.log(this.corteX);
+            if(this.frameAtual == this.frame){
+                if(this.corteX == this.largura*7){
+                    this.corteX = 0;
+                }else{
+                    this.corteX += this.largura;    
+                }
+                this.frameAtual = 0;
+            }else{
+                this.frameAtual += 1;
+            }
+        }
+
+        
+//  =============================================================================================================
+//  MAPA ======================================================================================================== 
+    function mapa(pontoX, pontoY, largura, altura, enderecoImagem, visivel){
+        this.pontoX     = pontoX;
+        this.pontoY     = pontoY;
+        this.largura    = largura;
+        this.altura     = altura;
+        this.img        = new Image();
+        this.img.src    = enderecoImagem;
+        this.visivel    = visivel || true;
+    }
+//  =============================================================================================================
+//  CAMERA ======================================================================================================//  PAREDE ===================================================================================================
+    var Parede = function(pontoX, pontoY, largura, altura, cor, visivel){             
+        this.pontoX  = pontoX;
+        this.pontoY  = pontoY;
+        this.largura = largura;
+        this.altura  = altura;
+        this.cor     = cor;
+        this.visivel = visivel || true;
+    }
+        Parede.prototype.metadeDaLargura = function(){
+            return this.largura/2;
+        }
+        Parede.prototype.metadeDaAltura = function(){
+            return this.altura/2;
+        }
+        Parede.prototype.pontoCentralX = function(){
+            return this.pontoX + this.metadeDaLargura();
+        }
+        Parede.prototype.pontoCentralY = function(){
+            return this.pontoY + this.metadeDaAltura();
+        }
+//  ==========================================================================================================
+//  PERSONAGEM =============================================================================================== 
+/*    var Personagem = function(pontoX, pontoY, largura, altura, enderecoImagem, corteX, corteY){
+        this.pontoX     = pontoX;
+        this.pontoY     = pontoY;
+        this.largura    = largura;
+        this.altura     = altura;
+        this.img        = new Image(); 
+        this.img.src    = enderecoImagem;
+        this.corteX     = corteX;
+        this.corteY     = corteY; 
+        this.frame      =  5;
+        this.frameAtual =  0;
+        
+    }    
+        Personagem.prototype.metadeDaLargura = function(){
+            return this.largura/2;        
+        }
+        Personagem.prototype.metadeDaAltura = function(){
+            return this.altura/2;
+        }
+        Personagem.prototype.pontoCentralX = function(){
+            return this.pontoX + this.metadeDaLargura();
+        }
+        Personagem.prototype.pontoCentralY = function(){
+            return this.pontoY + this.metadeDaAltura();
+        }
+        Personagem.prototype.moveSpriteDireita = function(){
+            console.log(this.corteX);
+            console.log(this.enderecoImagem);
+            
+            if(this.frameAtual == this.frame){
+                if(this.corteX == this.largura*7){
+                    this.corteX = 0;
+                }else{
+                    this.corteX += this.largura;    
+                }
+                this.frameAtual = 0;
+            }else{
+                this.frameAtual += 1;
+            }
+        }
+
+        */
 //  =============================================================================================================
 //  MAPA ======================================================================================================== 
     function mapa(pontoX, pontoY, largura, altura, enderecoImagem, visivel){
