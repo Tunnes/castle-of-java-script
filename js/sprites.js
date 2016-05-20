@@ -59,53 +59,30 @@ var Camera = function(pontoX, pontoY, largura, altura){
     }
 
 //  ==========================================================================================================
-//  PERSONAGEM =============================================================================================== 
+//  INIMIGO =============================================================================================== 
 var Inimigo = function(pontoX, pontoY, largura, altura, enderecoImagem, corteX, corteY){
-    this.pontoX     = pontoX;
-    this.pontoY     = pontoY;
-    this.largura    = largura;
-    this.altura     = altura;
-    this.img        = new Image(); 
-    this.img.src    = enderecoImagem;
-    this.corteX     = corteX;
-    this.corteY     = corteY; 
-    this.frame      =  10;
-    this.frameAtual =  0;
-    }    
-    Inimigo.prototype.metadeDaLargura    = function(){ return this.largura/2;    }
-    Inimigo.prototype.metadeDaAltura     = function(){ return this.altura/2;     }
-    Inimigo.prototype.pontoCentralX      = function(){ return this.pontoX + this.metadeDaLargura();  }
-    Inimigo.prototype.pontoCentralY      = function(){ return this.pontoY + this.metadeDaAltura();   }
-
-    Inimigo.prototype.seguir             = function(focoX,focoY){
-        if(this.pontoX < focoX && this.pontoY < focoY){
-            this.pontoX = this.pontoX + 2;
-            this.pontoY = this.pontoY + 2;
-            this.moveSprite();
-        }else{
-            if(this.pontoCentralX() < focoX){ this.pontoX = this.pontoX + 2; this.moveSprite();}
-            if(this.pontoCentralY() < focoY){ this.pontoY = this.pontoY + 2; this.moveSprite();}
-        }
-        if(this.pontoX > focoX && this.pontoY > focoY){
-            this.pontoX = this.pontoX - 2;
-            this.pontoY = this.pontoY - 2;
-            this.moveSprite();
-        }else{
-            if(this.pontoCentralX() > focoX){ this.pontoX = this.pontoX - 2; this.moveSprite();}
-            if(this.pontoCentralY() > focoY){ this.pontoY = this.pontoY - 2; this.moveSprite();}
-        }
-    }
-   
+        this.pontoX     = pontoX;
+        this.pontoY     = pontoY;
+        this.largura    = largura;
+        this.altura     = altura;
+        this.img        = new Image(); 
+        this.img.src    = enderecoImagem;
+        this.corteX     = corteX;
+        this.corteY     = corteY; 
+        this.frame      =  10;
+        this.frameAtual =  0;
+} 
+    Inimigo.prototype = new Personagem();
     
-    Inimigo.prototype.moveSprite = function(){
-       
-        if (this.frameAtual == this.frame){
-            
-            this.corteX == this.largura*7 ? this.corteX = 0 : this.corteX += this.largura;    
-            
-            this.frameAtual = 0;
-        }else{ 
-            this.frameAtual++;
-        }
+    Inimigo.prototype.seguir = function(focoX,focoY){
+        if      (this.pontoX < focoX && this.pontoY < focoY) { this.pontoX = this.pontoX + 1; this.corteY = 0;   }
+        else if (this.pontoX > focoX && this.pontoY > focoY) { this.pontoX = this.pontoX - 1; this.corteY = 77;  }
+        else if (this.pontoX < focoX)                        { this.pontoX = this.pontoX + 2; this.corteY = 0;   }
+        else if (this.pontoX > focoX)                        { this.pontoX = this.pontoX - 2; this.corteY = 77;  }
+        else if (this.pontoY < focoY)                        { this.pontoY = this.pontoY + 2; this.corteY = 231; }
+        else if (this.pontoY > focoY)                        { this.pontoY = this.pontoY - 2; this.corteY = 154; }
+        
+        this.atualizaSprite(this.altura,this.altura,this.corteY);
+        this.moveSprite();
     }
   

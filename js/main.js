@@ -14,12 +14,14 @@ function main(){
 //  ELEMENTOS PRINCIPAIS ===============================================================================================
     
     var mundoDoGame = new Mapa(0, 0, 2500, 2500, "../img/primeira.jpg", true);
-    var umOutroR    = new Inimigo(300,500,77,77,"../img/inimigo-vampiro.png",0,0);
+    //var umOutroR    = new Inimigo(300,500,77,77,"../img/inimigo-vampiro.png",0,0);
     var player      = new Personagem(0,0,96,52,"../img/player-patrick.png",0,0);
     var camera = new Camera(0,0,canvas.width,canvas.height);
-        sprites.push(mundoDoGame);
+        //sprites.push(mundoDoGame);
         //sprites.push(player);
-        sprites.push(umOutroR);
+      //  sprites.push(umOutroR);
+    var vampiro = new Inimigo(300,500,77,77,"../img/inimigo-vampiro.png",0,0);    
+        
    
 //  ====================================================================================================================    
     camera.pontoX = (mundoDoGame.largura - camera.largura)/2;
@@ -90,7 +92,7 @@ function main(){
         renderiza();
     }
     function atualiza(){
-        umOutroR.seguir(player.pontoX,player.pontoY);
+        vampiro.seguir(player.pontoX,player.pontoY);
         atualizaPosicaoDoPlayer();  // Atualiza a posição do jogador.
         camera.atualizaPosicao(player);  // Atualiza a posição da camera.
         
@@ -107,7 +109,7 @@ function main(){
             player.pontoY = Math.max(0,Math.min(mundoDoGame.altura - player.altura, player.pontoY));
             
             /*global bloqueia*/
-            bloqueia(umOutroR,player);
+            bloqueia(vampiro,player);
             
     }
     
@@ -118,16 +120,12 @@ function main(){
         contexto.save();
         contexto.translate(-camera.pontoX, -camera.pontoY);
         
-        for(var i in sprites){
-            var spr = sprites[i];
-            
-            
-            contexto.drawImage(player.img, player.corteX, player.corteY, player.largura, player.altura, player.pontoX, player.pontoY, player.largura, player.altura);    
-            contexto.drawImage(umOutroR.img, umOutroR.corteX, umOutroR.corteY, umOutroR.largura, umOutroR.altura, umOutroR.pontoX, umOutroR.pontoY, umOutroR.largura, umOutroR.altura);    
+        contexto.drawImage(mundoDoGame.img, 0, 0, mundoDoGame.largura, mundoDoGame.altura, mundoDoGame.pontoX, mundoDoGame.pontoY, mundoDoGame.largura, mundoDoGame.altura);
+        
+        contexto.drawImage(player.img, player.corteX, player.corteY, player.largura, player.altura, player.pontoX, player.pontoY, player.largura, player.altura);    
+        contexto.drawImage(vampiro.img, vampiro.corteX, vampiro.corteY, vampiro.largura, vampiro.altura, vampiro.pontoX, vampiro.pontoY, vampiro.largura, vampiro.altura);    
            
-            contexto.drawImage(spr.img, 0, 0, spr.largura, spr.altura, spr.pontoX, spr.pontoY, spr.largura, spr.altura);
-            
-        }
+        /*TEM UMA IDEIA 51 PRA ISSO AQUI MAIS DEPOIS EU VOU COLOCAR*/
         contexto.restore();
         // AQUI POSSO DEIXAR COISAS FIXAS.. AGORA AINDA NÃO MAN
         
