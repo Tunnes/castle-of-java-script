@@ -29,7 +29,7 @@ function main(){
 //  ====================================================================================================================	
 //  ELEMENTOS DE MOVIMENTAÇÃO DO JOGADOR ===============================================================================
 
-    var moveEsquerda, moveCima, moveDireita, moveBaixo, disparo = false;
+    var moveEsquerda, moveCima, moveDireita, moveBaixo,esteste, disparo = false;
     
     window.addEventListener("keydown",function(tecla){movimento(tecla, true)});
     window.addEventListener("keyup", function(tecla) {movimento(tecla, false);player.corteX = 0;});
@@ -54,8 +54,8 @@ function main(){
                 moveBaixo    = boleano, player.direcao = "Baixo";
                 break;
             case 32:
-                disparo      = boleano;
-                tiroTeste();
+                disparar();
+                
                 break;
         }
     };
@@ -86,16 +86,19 @@ function main(){
         }
 
     }
-    function tiroTeste(){
-        var tiro = { pontoX:player.pontoCentralX(), pontoY:player.pontoCentralY(), altura:20, largura:20, direcao: player.direcao };
-        disparos.push(tiro);
+    function disparar(){
+            if(player.direcao == "Esquerda")    {var tiro = new Projetil(player.pontoX, player.pontoY + 24, 10, 10, player.direcao);}
+            if(player.direcao == "Direita")     {var tiro = new Projetil(player.pontoX, player.pontoY + 24, 10, 10, player.direcao);}
+            if(player.direcao == "Cima")        {var tiro = new Projetil(player.pontoX + 24, player.pontoY, 10, 10, player.direcao);}
+            if(player.direcao == "Baixo")       {var tiro = new Projetil(player.pontoX + 24, player.pontoY, 10, 10, player.direcao);}
+            disparos.push(tiro);
     }
     function atualizaPosicaoDisparo(){
         disparos.forEach(function(e){
-            if(e.direcao == "Esquerda"){ e.pontoX -= 3;}
-            if(e.direcao == "Direita"){ e.pontoX += 3;}
-            if(e.direcao == "Cima"){ e.pontoY -= 3;}
-            if(e.direcao == "Baixo"){ e.pontoY += 3;}
+            if(e.direcao == "Esquerda"){ e.pontoX -= 30;}
+            if(e.direcao == "Direita"){ e.pontoX += 30;}
+            if(e.direcao == "Cima"){ e.pontoY -= 30;}
+            if(e.direcao == "Baixo"){ e.pontoY += 30;}
         });
     }
     //======================================================================================================
@@ -135,9 +138,14 @@ function main(){
         contexto.translate(-camera.pontoX, -camera.pontoY);
         
         contexto.drawImage(mundoDoGame.img, 0, 0, mundoDoGame.largura, mundoDoGame.altura, mundoDoGame.pontoX, mundoDoGame.pontoY, mundoDoGame.largura, mundoDoGame.altura);
-        disparos.forEach(function(e){ 
+        
+        disparos.forEach(function(e){
+            contexto.fillStyle="#ffe700";
+           
             contexto.fillRect(e.pontoX, e.pontoY, e.largura, e.altura);
+          
         });
+        
         contexto.drawImage(player.img, player.corteX, player.corteY, player.largura, player.altura, player.pontoX, player.pontoY, player.largura, player.altura);    
         contexto.drawImage(vampiro.img, vampiro.corteX, vampiro.corteY, vampiro.largura, vampiro.altura, vampiro.pontoX, vampiro.pontoY, vampiro.largura, vampiro.altura);    
            

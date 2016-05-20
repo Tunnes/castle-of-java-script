@@ -1,16 +1,18 @@
 //  PERSONAGEM =============================================================================================== 
 var Personagem = function(pontoX, pontoY, largura, altura, enderecoImagem, corteX, corteY, direcao){
-    this.pontoX     = pontoX;
-    this.pontoY     = pontoY;
-    this.largura    = largura;
-    this.altura     = altura;
-    this.img        = new Image(); 
-    this.img.src    = enderecoImagem;
-    this.corteX     = corteX;
-    this.corteY     = corteY; 
-    this.frame      =  4;
-    this.frameAtual =  0;
-    this.direcao    = direcao || "Direita";
+    this.pontoX         = pontoX;
+    this.pontoY         = pontoY;
+    this.largura        = largura;
+    this.altura         = altura;
+    this.img            = new Image(); 
+    this.img.src        = enderecoImagem;
+    this.corteX         = corteX;
+    this.corteY         = corteY; 
+    this.frame          =  4;
+    this.frameAtual     =  0;
+    this.direcao        = direcao || "Direita";
+    this.quebraChamaX   = this.pontoX + 24;
+    this.quebraChamaY   = this.pontoY - 24;
     }    
     Personagem.prototype.metadeDaLargura    = function(){ return this.largura/2;    }
     Personagem.prototype.metadeDaAltura     = function(){ return this.altura/2;     }
@@ -86,4 +88,12 @@ var Inimigo = function(pontoX, pontoY, largura, altura, enderecoImagem, corteX, 
         this.atualizaSprite(this.altura,this.altura,this.corteY);
         this.moveSprite();
     }
+//  DISPAROS ===================================================================================================================================
+var Projetil =  function(pontoX, pontoY, largura, altura, direcao){
+    this.pontoX     = pontoX;
+    this.pontoY     = pontoY;
+    this.largura    = largura;
+    this.altura     = altura;
+    this.direcao    = direcao;    
+}
   
