@@ -1,5 +1,5 @@
 //  PERSONAGEM =============================================================================================== 
-var Personagem = function(pontoX, pontoY, largura, altura, enderecoImagem, corteX, corteY){
+var Personagem = function(pontoX, pontoY, largura, altura, enderecoImagem, corteX, corteY, direcao){
     this.pontoX     = pontoX;
     this.pontoY     = pontoY;
     this.largura    = largura;
@@ -10,6 +10,7 @@ var Personagem = function(pontoX, pontoY, largura, altura, enderecoImagem, corte
     this.corteY     = corteY; 
     this.frame      =  4;
     this.frameAtual =  0;
+    this.direcao    = direcao || "Direita";
     }    
     Personagem.prototype.metadeDaLargura    = function(){ return this.largura/2;    }
     Personagem.prototype.metadeDaAltura     = function(){ return this.altura/2;     }

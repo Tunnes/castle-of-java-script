@@ -9,17 +9,14 @@ function main(){
     var canvas      = document.getElementById("telaDoJogo");   // Recebendo o objeto "canvas" do DOM.
     var contexto    = canvas.getContext("2d");                 // Indica que o contexto do canvas será em Bidimensional.
     var sprites     = [];                                       // Armazena todos os objetos a serem renderizados.
+    var disparos    = [];
         
 //  ====================================================================================================================
 //  ELEMENTOS PRINCIPAIS ===============================================================================================
     
     var mundoDoGame = new Mapa(0, 0, 2500, 2500, "../img/primeira.jpg", true);
-    //var umOutroR    = new Inimigo(300,500,77,77,"../img/inimigo-vampiro.png",0,0);
     var player      = new Personagem(0,0,96,52,"../img/player-patrick.png",0,0);
     var camera = new Camera(0,0,canvas.width,canvas.height);
-        //sprites.push(mundoDoGame);
-        //sprites.push(player);
-      //  sprites.push(umOutroR);
     var vampiro = new Inimigo(300,500,77,77,"../img/inimigo-vampiro.png",0,0);    
         
    
@@ -32,7 +29,7 @@ function main(){
 //  ====================================================================================================================	
 //  ELEMENTOS DE MOVIMENTAÇÃO DO JOGADOR ===============================================================================
 
-    var moveEsquerda, moveCima, moveDireita, moveBaixo = false;
+    var moveEsquerda, moveCima, moveDireita, moveBaixo, disparo = false;
     
     window.addEventListener("keydown",function(tecla){movimento(tecla, true)});
     window.addEventListener("keyup", function(tecla) {movimento(tecla, false);player.corteX = 0;});
@@ -45,16 +42,20 @@ function main(){
             
         switch (tecla.keyCode){
             case 37:
-                moveEsquerda = boleano;
+                moveEsquerda = boleano, player.direcao = "Esquerda";
                 break;
             case 38:
-                moveCima     = boleano;
+                moveCima     = boleano, player.direcao = "Cima";
                 break;
             case 39:
-                moveDireita  = boleano;
+                moveDireita  = boleano, player.direcao = "Direita";
                 break;
             case 40:
-                moveBaixo    = boleano;
+                moveBaixo    = boleano, player.direcao = "Baixo";
+                break;
+            case 32:
+                disparo      = boleano;
+                tiroTeste();
                 break;
         }
     };
@@ -83,7 +84,20 @@ function main(){
             player.pontoY = player.pontoY + 5; 
             player.moveSprite();    
         }
-    };
+
+    }
+    function tiroTeste(){
+        var tiro = { pontoX:player.pontoCentralX(), pontoY:player.pontoCentralY(), altura:20, largura:20, direcao: player.direcao };
+        disparos.push(tiro);
+    }
+    function atualizaPosicaoDisparo(){
+        disparos.forEach(function(e){
+            if(e.direcao == "Esquerda"){ e.pontoX -= 3;}
+            if(e.direcao == "Direita"){ e.pontoX += 3;}
+            if(e.direcao == "Cima"){ e.pontoY -= 3;}
+            if(e.direcao == "Baixo"){ e.pontoY += 3;}
+        });
+    }
     //======================================================================================================
     
     function loop(){
@@ -95,7 +109,7 @@ function main(){
         vampiro.seguir(player.pontoX,player.pontoY);
         atualizaPosicaoDoPlayer();  // Atualiza a posição do jogador.
         camera.atualizaPosicao(player);  // Atualiza a posição da camera.
-        
+        atualizaPosicaoDisparo();
         
         //  LIMITES ==================================================================================
         //  Para a implementação da limitação do mundo que criei, tive que fazer o uso de duas funções
@@ -121,7 +135,9 @@ function main(){
         contexto.translate(-camera.pontoX, -camera.pontoY);
         
         contexto.drawImage(mundoDoGame.img, 0, 0, mundoDoGame.largura, mundoDoGame.altura, mundoDoGame.pontoX, mundoDoGame.pontoY, mundoDoGame.largura, mundoDoGame.altura);
-        
+        disparos.forEach(function(e){ 
+            contexto.fillRect(e.pontoX, e.pontoY, e.largura, e.altura);
+        });
         contexto.drawImage(player.img, player.corteX, player.corteY, player.largura, player.altura, player.pontoX, player.pontoY, player.largura, player.altura);    
         contexto.drawImage(vampiro.img, vampiro.corteX, vampiro.corteY, vampiro.largura, vampiro.altura, vampiro.pontoX, vampiro.pontoY, vampiro.largura, vampiro.altura);    
            
