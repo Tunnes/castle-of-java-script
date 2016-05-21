@@ -45,3 +45,29 @@
             }
         }
     }
+    
+// PONTOS ----------------------------------------------------------------------------------------------------------------------
+function mortos(elemento01,elemento02,vestijos){
+    
+    var distanciaAtualX  = elemento01.pontoCentralX()   - elemento02.pontoCentralX();
+    var distanciaAtualY  = elemento01.pontoCentralY()   - elemento02.pontoCentralY();
+    var distanciaMinimaX = elemento01.metadeDaLargura() + elemento02.metadeDaLargura();
+    var distanciaMinimaY = elemento01.metadeDaAltura()  + elemento02.metadeDaAltura();
+        
+    if( Math.abs(distanciaAtualX) < distanciaMinimaX && Math.abs(distanciaAtualY) < distanciaMinimaY){
+        var ultrapassagemX = distanciaMinimaX - Math.abs(distanciaAtualX);
+        var ultrapassagemY = distanciaMinimaY - Math.abs(distanciaAtualY);
+        if(elemento01.vida > 0){
+            
+            elemento01.vida -= 1;
+            var vest = new Vestijo(elemento01.pontoCentralX(),elemento01.pontoCentralY(),10,10);
+            vestijos.push(vest);
+            
+        }else{
+           elemento01.vivo = false;
+           console.log("Morri..")
+        }
+        
+        
+    }
+}

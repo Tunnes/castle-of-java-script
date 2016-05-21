@@ -30,6 +30,9 @@ var Personagem = function(pontoX, pontoY, largura, altura, enderecoImagem, corte
             this.frameAtual++;
         }
     }
+    Personagem.prototype.disparar = function (disparos){
+        return calibre20(disparos,this.direcao,this.pontoX,this.pontoY);
+    }
         
 //  MAPA ======================================================================================================== 
 var Mapa = function (pontoX, pontoY, largura, altura, enderecoImagem, visivel){
@@ -62,18 +65,20 @@ var Camera = function(pontoX, pontoY, largura, altura){
     }
 
 //  ==========================================================================================================
-//  INIMIGO =============================================================================================== 
+//  INIMIGO =======================================================================================================================================
 var Inimigo = function(pontoX, pontoY, largura, altura, enderecoImagem, corteX, corteY){
-        this.pontoX     = pontoX;
-        this.pontoY     = pontoY;
-        this.largura    = largura;
-        this.altura     = altura;
-        this.img        = new Image(); 
-        this.img.src    = enderecoImagem;
-        this.corteX     = corteX;
-        this.corteY     = corteY; 
-        this.frame      =  10;
-        this.frameAtual =  0;
+    this.pontoX     = pontoX;
+    this.pontoY     = pontoY;
+    this.largura    = largura;
+    this.altura     = altura;
+    this.img        = new Image(); 
+    this.img.src    = enderecoImagem;
+    this.corteX     = corteX;
+    this.corteY     = corteY; 
+    this.frame      =  10;
+    this.frameAtual =  0;
+    this.vida       =  100;
+    this.vivo       = true;
 } 
     Inimigo.prototype = new Personagem();
     
@@ -88,6 +93,14 @@ var Inimigo = function(pontoX, pontoY, largura, altura, enderecoImagem, corteX, 
         this.atualizaSprite(this.altura,this.altura,this.corteY);
         this.moveSprite();
     }
+var Vestijo = function (pontoX, pontoY, largura, altura){
+    this.pontoX     = pontoX;
+    this.pontoY     = pontoY;
+    this.largura    = largura;
+    this.altura     = altura;
+}
+//  ===============================================================================================================================================
+
 //  DISPAROS ===================================================================================================================================
 var Projetil =  function(pontoX, pontoY, largura, altura, direcao){
     this.pontoX     = pontoX;
@@ -96,4 +109,31 @@ var Projetil =  function(pontoX, pontoY, largura, altura, direcao){
     this.altura     = altura;
     this.direcao    = direcao;    
 }
-  
+    Projetil.prototype = new Personagem();
+
+//  MUNIÇÕES ===================================================================================================================================
+    function calibre20(disparos, direcao, pontoX, pontoY){
+        switch (direcao){
+            case "Esquerda":
+                var tiro0 =  new  Projetil(pontoX + 25, pontoY + 24, 10, 10,  direcao);
+                var tiro1 =  new  Projetil(pontoX + 25, pontoY + 40, 10, 10,  direcao);
+                var tiro2 =  new  Projetil(pontoX + 25, pontoY + 8,  10, 10,  direcao);
+                break;
+            case "Direita":
+                var tiro0 =  new  Projetil(pontoX + 70, pontoY + 24, 10, 10,  direcao);
+                var tiro1 =  new  Projetil(pontoX + 70, pontoY + 40, 10, 10,  direcao);
+                var tiro2 =  new  Projetil(pontoX + 70, pontoY + 8,  10, 10,  direcao);
+                break;
+            case "Cima":
+                var tiro0 =  new  Projetil(pontoX + 24, pontoY + 15, 10, 10,  direcao);
+                var tiro1 =  new  Projetil(pontoX + 40, pontoY + 15, 10, 10,  direcao);
+                var tiro2 =  new  Projetil(pontoX + 8 , pontoY + 15, 10, 10,  direcao);
+                break;
+            case "Baixo":
+                var tiro0 =  new  Projetil(pontoX + 24, pontoY + 70, 10, 10,  direcao);
+                var tiro1 =  new  Projetil(pontoX + 40, pontoY + 70, 10, 10,  direcao);
+                var tiro2 =  new  Projetil(pontoX + 8 , pontoY + 70, 10, 10,  direcao);
+                break;
+        }
+        return disparos.push(tiro0, tiro1, tiro2);
+    }

@@ -10,16 +10,21 @@ function main(){
     var contexto    = canvas.getContext("2d");                 // Indica que o contexto do canvas será em Bidimensional.
     var sprites     = [];                                       // Armazena todos os objetos a serem renderizados.
     var disparos    = [];
-        
+    var vampiros    = [];
+    var vestijos    = [];
 //  ====================================================================================================================
 //  ELEMENTOS PRINCIPAIS ===============================================================================================
     
     var mundoDoGame = new Mapa(0, 0, 2500, 2500, "../img/primeira.jpg", true);
     var player      = new Personagem(0,0,96,52,"../img/player-patrick.png",0,0);
     var camera = new Camera(0,0,canvas.width,canvas.height);
-    var vampiro = new Inimigo(300,500,77,77,"../img/inimigo-vampiro.png",0,0);    
-        
-   
+    
+    var vampiro1 = new Inimigo(300,500,77,77,"../img/inimigo-vampiro.png",0,0);    
+    
+    var vampiro2 = new Inimigo(400,600,77,77,"../img/inimigo-vampiro.png",0,0); 
+    
+    vampiros.push(vampiro1,vampiro2);
+    
 //  ====================================================================================================================    
     camera.pontoX = (mundoDoGame.largura - camera.largura)/2;
 	camera.pontoY = (mundoDoGame.altura - camera.altura)/2;
@@ -54,7 +59,8 @@ function main(){
                 moveBaixo    = boleano, player.direcao = "Baixo";
                 break;
             case 32:
-                disparar();
+                player.disparar(disparos);
+                //disparar();
                 
                 break;
         }
@@ -86,19 +92,12 @@ function main(){
         }
 
     }
-    function disparar(){
-            if(player.direcao == "Esquerda")    {var tiro = new Projetil(player.pontoX, player.pontoY + 24, 10, 10, player.direcao);}
-            if(player.direcao == "Direita")     {var tiro = new Projetil(player.pontoX, player.pontoY + 24, 10, 10, player.direcao);}
-            if(player.direcao == "Cima")        {var tiro = new Projetil(player.pontoX + 24, player.pontoY, 10, 10, player.direcao);}
-            if(player.direcao == "Baixo")       {var tiro = new Projetil(player.pontoX + 24, player.pontoY, 10, 10, player.direcao);}
-            disparos.push(tiro);
-    }
     function atualizaPosicaoDisparo(){
         disparos.forEach(function(e){
-            if(e.direcao == "Esquerda"){ e.pontoX -= 30;}
-            if(e.direcao == "Direita"){ e.pontoX += 30;}
-            if(e.direcao == "Cima"){ e.pontoY -= 30;}
-            if(e.direcao == "Baixo"){ e.pontoY += 30;}
+            if(e.direcao == "Esquerda") { e.pontoX -= 40;}
+            if(e.direcao == "Direita")  { e.pontoX += 30;}
+            if(e.direcao == "Cima")     { e.pontoY -= 30;}
+            if(e.direcao == "Baixo")    { e.pontoY += 30;}
         });
     }
     //======================================================================================================
@@ -109,7 +108,19 @@ function main(){
         renderiza();
     }
     function atualiza(){
-        vampiro.seguir(player.pontoX,player.pontoY);
+        
+        vampiros = vampiros.filter(function(elemento){
+            return elemento.vivo == true;
+        });
+        vampiros.forEach(function(elemento){
+            
+            elemento.seguir(player.pontoX,player.pontoY);
+            bloqueia(elemento,player);
+            
+            disparos.forEach(function(tiro){ mortos(elemento,tiro,vestijos); });
+            
+        });
+        
         atualizaPosicaoDoPlayer();  // Atualiza a posição do jogador.
         camera.atualizaPosicao(player);  // Atualiza a posição da camera.
         atualizaPosicaoDisparo();
@@ -125,8 +136,11 @@ function main(){
             player.pontoX = Math.max(0,Math.min(mundoDoGame.largura - player.largura, player.pontoX));
             player.pontoY = Math.max(0,Math.min(mundoDoGame.altura - player.altura, player.pontoY));
             
+            //Verificando se acertou o tiro..
+            
             /*global bloqueia*/
-            bloqueia(vampiro,player);
+            
+            
             
     }
     
@@ -141,13 +155,19 @@ function main(){
         
         disparos.forEach(function(e){
             contexto.fillStyle="#ffe700";
-           
-            contexto.fillRect(e.pontoX, e.pontoY, e.largura, e.altura);
-          
+            contexto.fillRect(e.pontoX, e.pontoY, e.largura, e.altura);      
+        });
+        vampiros.forEach(function(e){
+            contexto.drawImage(e.img, e.corteX, e.corteY, e.largura, e.altura, e.pontoX, e.pontoY, e.largura, e.altura);    
         });
         
+        vestijos.forEach(function(e){
+            contexto.fillRect(e.pontoX, e.pontoY, e.largura, e.largura);   
+        });
+        
+        
+        
         contexto.drawImage(player.img, player.corteX, player.corteY, player.largura, player.altura, player.pontoX, player.pontoY, player.largura, player.altura);    
-        contexto.drawImage(vampiro.img, vampiro.corteX, vampiro.corteY, vampiro.largura, vampiro.altura, vampiro.pontoX, vampiro.pontoY, vampiro.largura, vampiro.altura);    
            
         /*TEM UMA IDEIA 51 PRA ISSO AQUI MAIS DEPOIS EU VOU COLOCAR*/
         contexto.restore();
