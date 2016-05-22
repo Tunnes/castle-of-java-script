@@ -21,12 +21,13 @@ function main(){
 //  e nosso contexto que é responsavel por dar vida a tela do canvas.. tipo tudo que você desenha nele e renderiza
 //  sera exibido dentro do canvas lá no DOM.
     
-    var canvas      = document.getElementById("telaDoJogo");   // Recebendo o objeto "canvas" do DOM.
-    var contexto    = canvas.getContext("2d");                 // Indica que o contexto do canvas será em Bidimensional.
-    var sprites     = [];                                       // Armazena todos os objetos a serem renderizados.
-    var disparos    = [];
-    var vampiros    = [];
-    var vestijos    = [];
+    var canvas       = document.getElementById("telaDoJogo");   // Recebendo o objeto "canvas" do DOM.
+    var contexto     = canvas.getContext("2d");                 // Indica que o contexto do canvas será em Bidimensional.
+    var sprites      = [];                                       // Armazena todos os objetos a serem renderizados.
+    var disparos     = [];
+    var vampiros     = [];
+    var vestijos     = [];
+    var stringDaVida = "PATRICK + + + +";
 //  ====================================================================================================================
 //  ELEMENTOS PRINCIPAIS ===============================================================================================
     
@@ -77,6 +78,8 @@ function main(){
             case 32:
                 if(cooldownDoSpaco == boleano ){
                     player.disparar(disparos);
+                    setTimeout(function(){ player.disparar(disparos); }, 50);
+                    
                     cooldownDoSpaco == boleano;
                 }
                 break;
@@ -111,7 +114,7 @@ function main(){
     }
     function atualizaPosicaoDisparo(){
         disparos.forEach(function(e){
-            if(e.direcao == "Esquerda") { e.pontoX -= 40;}
+            if(e.direcao == "Esquerda") { e.pontoX -= 30;}
             if(e.direcao == "Direita")  { e.pontoX += 30;}
             if(e.direcao == "Cima")     { e.pontoY -= 30;}
             if(e.direcao == "Baixo")    { e.pontoY += 30;}
@@ -128,6 +131,10 @@ function main(){
         vampiros = vampiros.filter(function(elemento){
             return elemento.vivo == true;
         });
+        player.vida == 3 ? stringDaVida = "PATRICK + + +" : stringDaVida;
+        player.vida == 2 ? stringDaVida = "PATRICK + +" : stringDaVida;
+        player.vida == 1 ? stringDaVida = "PATRICK +" : stringDaVida;
+        
         // Executa todas as inteções que o Zombi possui.
         vampiros.forEach(function(zombi){
             zombi.seguir(player.pontoX,player.pontoY);
@@ -167,7 +174,10 @@ function main(){
         contexto.translate(-camera.pontoX, -camera.pontoY);
         
         contexto.drawImage(mundoDoGame.img, 0, 0, mundoDoGame.largura, mundoDoGame.altura, mundoDoGame.pontoX, mundoDoGame.pontoY, mundoDoGame.largura, mundoDoGame.altura);
-        
+        vestijos.forEach(function(e){
+            //contexto.fillStyle="red";
+            contexto.drawImage(e.img, e.corteX, e.corteY, e.largura, e.altura, e.pontoX, e.pontoY, e.largura, e.altura);   
+        });
         disparos.forEach(function(e){
             contexto.fillStyle="#ffe700";
             contexto.fillRect(e.pontoX, e.pontoY, e.largura, e.altura);      
@@ -176,10 +186,7 @@ function main(){
             contexto.drawImage(e.img, e.corteX, e.corteY, e.largura, e.altura, e.pontoX, e.pontoY, e.largura, e.altura);    
         });
         
-        vestijos.forEach(function(e){
-            contexto.fillStyle="red";
-            contexto.fillRect(e.pontoX, e.pontoY, e.largura, e.largura);   
-        });
+        
         
         
        
@@ -208,10 +215,10 @@ function main(){
             // Fill with gradient
             //contexto.fillStyle = gradient;
             
-             contexto.font="22px VT323";
-            contexto.fillText("PATRICK + + + +", canvas.width - 25, 30);
+            contexto.font="22px VT323";
+            contexto.fillText(stringDaVida, canvas.width - 25, 30);
             contexto.font="60px VT323";
-        contexto.fillText("HITS "+ player.score, canvas.width - 20, 85);
+            contexto.fillText("HITS "+ player.score, canvas.width - 20, 85);
         
         //contexto.font="20px VT323";
         //contexto.fillText("PATRICK * * * *", canvas.width - 180, 85);

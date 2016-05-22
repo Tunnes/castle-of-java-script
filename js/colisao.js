@@ -58,10 +58,10 @@ function mataZombi(elemento01, elemento02,vestijos, disparos, player){
         var ultrapassagemX = distanciaMinimaX - Math.abs(distanciaAtualX);
         var ultrapassagemY = distanciaMinimaY - Math.abs(distanciaAtualY);
         player.score  += 1;
-       
+        
         if(elemento01.vida > 0){
             elemento01.vida -= 1;
-            var vest = new Vestijo(elemento01.pontoCentralX(),elemento01.pontoCentralY(),10,10);
+            var vest = new Vestijo(elemento01.pontoCentralX(),elemento01.pontoCentralY());
             vestijos.push(vest);
             //Remove os disparos da tela
             disparos.pop();

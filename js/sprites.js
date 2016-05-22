@@ -14,6 +14,7 @@ var Personagem = function(pontoX, pontoY, largura, altura, enderecoImagem, corte
     this.quebraChamaX   = this.pontoX + 24;
     this.quebraChamaY   = this.pontoY - 24;
     this.score          = 0;
+    this.vida           = 4;
     
     }    
     Personagem.prototype.metadeDaLargura    = function(){ return this.largura/2;    }
@@ -33,7 +34,7 @@ var Personagem = function(pontoX, pontoY, largura, altura, enderecoImagem, corte
         }
     }
     Personagem.prototype.disparar = function (disparos){
-        return calibre20(disparos,this.direcao,this.pontoX,this.pontoY);
+        calibre20(disparos,this.direcao,this.pontoX,this.pontoY);
     }
         
 //  MAPA ======================================================================================================== 
@@ -102,11 +103,15 @@ var Inimigo = function(pontoX, pontoY, largura, altura, enderecoImagem, corteX, 
         });
     }
     
-var Vestijo = function (pontoX, pontoY, largura, altura){
+var Vestijo = function (pontoX, pontoY){
     this.pontoX     = pontoX;
     this.pontoY     = pontoY;
-    this.largura    = largura;
-    this.altura     = altura;
+    this.largura    = 30;
+    this.altura     = 30;
+    this.img        = new Image(); 
+    this.img.src    = "../img/inimigo-vestijo.png";
+    this.corteX     = 0;
+    this.corteY     = 0;
 }
 //  ===============================================================================================================================================
 
