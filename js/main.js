@@ -1,4 +1,19 @@
 function main(){
+// =========================================================================
+  WebFontConfig = {
+    google: { families: [ 'VT323::latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+// =========================================================================   
+    
+    
 //  RECURSOS-DO-GAME===================================================================================================
 //  Neste bloco estão os elementos que formam os recursos do game, como por exemplo o mapa, personagens e
 //  inimigos, todos eles são armazenados "empilhados" em um vetor de objetos que futuramente sera renderizado.
@@ -117,7 +132,9 @@ function main(){
             elemento.seguir(player.pontoX,player.pontoY);
             bloqueia(elemento,player);
             
-            disparos.forEach(function(tiro){ mortos(elemento,tiro,vestijos); });
+            disparos.forEach(function(tiro){ 
+                mortos(elemento,tiro,vestijos,disparos);
+            });
             
         });
         
@@ -172,6 +189,12 @@ function main(){
         /*TEM UMA IDEIA 51 PRA ISSO AQUI MAIS DEPOIS EU VOU COLOCAR*/
         contexto.restore();
         // AQUI POSSO DEIXAR COISAS FIXAS.. AGORA AINDA NÃO MAN
+        contexto.fillStyle = "black";
+        contexto.fillRect(canvas.width - 302, 10, 300, 50);
+        contexto.font="50px VT323";
+        //font-family: 'VT323', ;
+        contexto.fillStyle = "white";
+        contexto.fillText("SCORRE 001", canvas.width - 280, 45);
         
         // contexto.drawImage(background, 0, 0, 1920, 1080, 0, 0, 1920, 1080);
         // contexto desenhe nomeDaImage, ondeElaComeça x e y, tamanhoDaImagem,  

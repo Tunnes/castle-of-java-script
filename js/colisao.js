@@ -47,7 +47,7 @@
     }
     
 // PONTOS ----------------------------------------------------------------------------------------------------------------------
-function mortos(elemento01,elemento02,vestijos){
+function mortos(elemento01,elemento02,vestijos,disparos){
     
     var distanciaAtualX  = elemento01.pontoCentralX()   - elemento02.pontoCentralX();
     var distanciaAtualY  = elemento01.pontoCentralY()   - elemento02.pontoCentralY();
@@ -58,11 +58,11 @@ function mortos(elemento01,elemento02,vestijos){
         var ultrapassagemX = distanciaMinimaX - Math.abs(distanciaAtualX);
         var ultrapassagemY = distanciaMinimaY - Math.abs(distanciaAtualY);
         if(elemento01.vida > 0){
-            
             elemento01.vida -= 1;
             var vest = new Vestijo(elemento01.pontoCentralX(),elemento01.pontoCentralY(),10,10);
             vestijos.push(vest);
-            
+            //Remove os disparos da tela
+            disparos.pop();
         }else{
            elemento01.vivo = false;
            console.log("Morri..")
