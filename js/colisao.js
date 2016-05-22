@@ -47,7 +47,7 @@
     }
     
 // PONTOS ----------------------------------------------------------------------------------------------------------------------
-function mortos(elemento01,elemento02,vestijos,disparos){
+function mataZombi(elemento01, elemento02,vestijos, disparos, player){
     
     var distanciaAtualX  = elemento01.pontoCentralX()   - elemento02.pontoCentralX();
     var distanciaAtualY  = elemento01.pontoCentralY()   - elemento02.pontoCentralY();
@@ -57,17 +57,23 @@ function mortos(elemento01,elemento02,vestijos,disparos){
     if( Math.abs(distanciaAtualX) < distanciaMinimaX && Math.abs(distanciaAtualY) < distanciaMinimaY){
         var ultrapassagemX = distanciaMinimaX - Math.abs(distanciaAtualX);
         var ultrapassagemY = distanciaMinimaY - Math.abs(distanciaAtualY);
+        player.score  += 1;
+       
         if(elemento01.vida > 0){
             elemento01.vida -= 1;
             var vest = new Vestijo(elemento01.pontoCentralX(),elemento01.pontoCentralY(),10,10);
             vestijos.push(vest);
             //Remove os disparos da tela
             disparos.pop();
+            
+            
+            
+          
         }else{
            elemento01.vivo = false;
-           console.log("Morri..")
+           console.log("Morri..");
         }
         
-        
+     
     }
 }

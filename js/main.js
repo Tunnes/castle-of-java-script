@@ -36,7 +36,8 @@ function main(){
     
     var vampiro1 = new Inimigo(300,500,77,77,"../img/inimigo-vampiro.png",0,0);    
     
-    var vampiro2 = new Inimigo(400,600,77,77,"../img/inimigo-vampiro.png",0,0); 
+    var vampiro2 = new Inimigo(400,600,77,77,"../img/inimigo-vampiro.png",0,0);
+   
     
     vampiros.push(vampiro1,vampiro2);
     
@@ -123,20 +124,16 @@ function main(){
         renderiza();
     }
     function atualiza(){
-        
         vampiros = vampiros.filter(function(elemento){
             return elemento.vivo == true;
         });
-        vampiros.forEach(function(elemento){
-            
-            elemento.seguir(player.pontoX,player.pontoY);
-            bloqueia(elemento,player);
-            
-            disparos.forEach(function(tiro){ 
-                mortos(elemento,tiro,vestijos,disparos);
-            });
-            
+        // Executa todas as inteções que o Zombi possui.
+        vampiros.forEach(function(zombi){
+            zombi.seguir(player.pontoX,player.pontoY);
+            bloqueia(zombi,player);
+            zombi.levarUmTiro(zombi,disparos,vestijos, player);
         });
+    
         
         atualizaPosicaoDoPlayer();  // Atualiza a posição do jogador.
         camera.atualizaPosicao(player);  // Atualiza a posição da camera.
@@ -179,11 +176,12 @@ function main(){
         });
         
         vestijos.forEach(function(e){
+            contexto.fillStyle="red";
             contexto.fillRect(e.pontoX, e.pontoY, e.largura, e.largura);   
         });
         
         
-        
+       
         contexto.drawImage(player.img, player.corteX, player.corteY, player.largura, player.altura, player.pontoX, player.pontoY, player.largura, player.altura);    
            
         /*TEM UMA IDEIA 51 PRA ISSO AQUI MAIS DEPOIS EU VOU COLOCAR*/
@@ -194,7 +192,7 @@ function main(){
         contexto.font="50px VT323";
         //font-family: 'VT323', ;
         contexto.fillStyle = "white";
-        contexto.fillText("SCORRE 001", canvas.width - 280, 45);
+        contexto.fillText("SCORRE "+ player.score, canvas.width - 280, 45);
         
         // contexto.drawImage(background, 0, 0, 1920, 1080, 0, 0, 1920, 1080);
         // contexto desenhe nomeDaImage, ondeElaComeça x e y, tamanhoDaImagem,  

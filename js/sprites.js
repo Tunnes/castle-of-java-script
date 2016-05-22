@@ -13,6 +13,8 @@ var Personagem = function(pontoX, pontoY, largura, altura, enderecoImagem, corte
     this.direcao        = direcao || "Direita";
     this.quebraChamaX   = this.pontoX + 24;
     this.quebraChamaY   = this.pontoY - 24;
+    this.score          = 0;
+    
     }    
     Personagem.prototype.metadeDaLargura    = function(){ return this.largura/2;    }
     Personagem.prototype.metadeDaAltura     = function(){ return this.altura/2;     }
@@ -93,6 +95,13 @@ var Inimigo = function(pontoX, pontoY, largura, altura, enderecoImagem, corteX, 
         this.atualizaSprite(this.altura,this.altura,this.corteY);
         this.moveSprite();
     }
+    Inimigo.prototype.levarUmTiro = function(quemLevou,disparos,vestijos, player){
+        disparos.forEach(function(tiro){
+            /*global mataZombi*/
+            mataZombi(quemLevou, tiro, vestijos, disparos, player);
+        });
+    }
+    
 var Vestijo = function (pontoX, pontoY, largura, altura){
     this.pontoX     = pontoX;
     this.pontoY     = pontoY;
