@@ -50,7 +50,7 @@ function main(){
 //  ====================================================================================================================	
 //  ELEMENTOS DE MOVIMENTAÇÃO DO JOGADOR ===============================================================================
 
-    var moveEsquerda, moveCima, moveDireita, moveBaixo,esteste, disparo = false;
+    var moveEsquerda, moveCima, moveDireita, moveBaixo, cooldownDoSpaco  = false;
     
     window.addEventListener("keydown",function(tecla){movimento(tecla, true)});
     window.addEventListener("keyup", function(tecla) {movimento(tecla, false);player.corteX = 0;});
@@ -75,9 +75,10 @@ function main(){
                 moveBaixo    = boleano, player.direcao = "Baixo";
                 break;
             case 32:
-                player.disparar(disparos);
-                //disparar();
-                
+                if(cooldownDoSpaco == boleano ){
+                    player.disparar(disparos);
+                    cooldownDoSpaco == boleano;
+                }
                 break;
         }
     };
@@ -188,14 +189,40 @@ function main(){
         contexto.restore();
         // AQUI POSSO DEIXAR COISAS FIXAS.. AGORA AINDA NÃO MAN
         contexto.fillStyle = "black";
-        contexto.fillRect(canvas.width - 302, 10, 300, 50);
-        contexto.font="50px VT323";
-        //font-family: 'VT323', ;
+       
+        contexto.fillRect(canvas.width - 202, 10, 200, 30);
+        contexto.fillRect(canvas.width - 302, 45, 300, 50);
+        
         contexto.fillStyle = "white";
-        contexto.fillText("SCORRE "+ player.score, canvas.width - 280, 45);
+        
+       
+        contexto.textAlign = "right";
+        
+        
+        
+        contexto.textAlign = "right";
+            // var gradient = contexto.createLinearGradient(0, 0, canvas.width, 0);
+            // gradient.addColorStop("0", "magenta");
+            // gradient.addColorStop("0.5", "blue");
+            // gradient.addColorStop("1.0", "red");
+            // Fill with gradient
+            //contexto.fillStyle = gradient;
+            
+             contexto.font="22px VT323";
+            contexto.fillText("PATRICK + + + +", canvas.width - 25, 30);
+            contexto.font="60px VT323";
+        contexto.fillText("HITS "+ player.score, canvas.width - 20, 85);
+        
+        //contexto.font="20px VT323";
+        //contexto.fillText("PATRICK * * * *", canvas.width - 180, 85);
+        
+        
+        //contexto.font="20px VT323";
+        //contexto.fillText("PONTOS "+ player.score, canvas.width - 280, 45);
         
         // contexto.drawImage(background, 0, 0, 1920, 1080, 0, 0, 1920, 1080);
-        // contexto desenhe nomeDaImage, ondeElaComeça x e y, tamanhoDaImagem,  
+        // contexto desenhe nomeDaImage, ondeElaComeça x e y, tamanhoDaImagem,
+        // Blind Guardian Wacken muito boa a musicagi
     }
     loop();
 }
