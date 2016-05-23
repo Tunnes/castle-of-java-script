@@ -28,6 +28,7 @@ function main(){
     var vampiros     = [];
     var vestijos     = [];
     var stringDaVida = "PATRICK + + + +";
+    var nPassara     = [];  
 //  ====================================================================================================================
 //  ELEMENTOS PRINCIPAIS ===============================================================================================
     
@@ -39,6 +40,9 @@ function main(){
     
     var vampiro2 = new Inimigo(400,600,77,77,"../img/inimigo-vampiro.png",0,0);
    
+    var parTeste = new Parede(386,588,24,1082,386,588);
+     
+    //nPassara.push(parTeste);
     
     vampiros.push(vampiro1,vampiro2);
     
@@ -78,8 +82,6 @@ function main(){
             case 32:
                 if(cooldownDoSpaco == boleano ){
                     player.disparar(disparos);
-                    setTimeout(function(){ player.disparar(disparos); }, 50);
-                    
                     cooldownDoSpaco == boleano;
                 }
                 break;
@@ -112,13 +114,17 @@ function main(){
         }
 
     }
+    //Coisas a se pensar...
     function atualizaPosicaoDisparo(){
-        disparos.forEach(function(e){
-            if(e.direcao == "Esquerda") { e.pontoX -= 30;}
-            if(e.direcao == "Direita")  { e.pontoX += 30;}
-            if(e.direcao == "Cima")     { e.pontoY -= 30;}
-            if(e.direcao == "Baixo")    { e.pontoY += 30;}
+        disparos = disparos.filter(function(disparo){
+           return   disparo.pontoX - 300 < player.pontoX && disparo.direcao == "Direita"    || disparo.pontoX + 300 > player.pontoX && disparo.direcao == "Esquerda"   || disparo.pontoY - 300 < player.pontoY && disparo.direcao == "Baixo"      || disparo.pontoY + 300 > player.pontoY && disparo.direcao == "Cima"   
         });
+        disparos.forEach(function(disparo){
+            if(disparo.direcao == "Esquerda") { disparo.pontoX -= 30;}
+            if(disparo.direcao == "Direita")  { disparo.pontoX += 30;}
+            if(disparo.direcao == "Cima")     { disparo.pontoY -= 30;}
+            if(disparo.direcao == "Baixo")    { disparo.pontoY += 30;}
+        }); 
     }
     //======================================================================================================
     
@@ -129,19 +135,24 @@ function main(){
     }
     function atualiza(){
         vampiros = vampiros.filter(function(elemento){
-            return elemento.vivo == true;
+            return elemento.vivo;
         });
-        player.vida == 3 ? stringDaVida = "PATRICK + + +" : stringDaVida;
-        player.vida == 2 ? stringDaVida = "PATRICK + +" : stringDaVida;
-        player.vida == 1 ? stringDaVida = "PATRICK +" : stringDaVida;
+        player.vida < 300 ? stringDaVida = "PATRICK + + +" : stringDaVida;
+        player.vida < 200 ? stringDaVida = "PATRICK + +" : stringDaVida;
+        player.vida < 100 ? stringDaVida = "PATRICK +" : stringDaVida;
         
         // Executa todas as inteções que o Zombi possui.
         vampiros.forEach(function(zombi){
             zombi.seguir(player.pontoX,player.pontoY);
-            bloqueia(zombi,player);
+            // Essa funcao eh doida.
+            zombi.naoMeToque(zombi,vampiros);
+            dano(zombi,player);
+            //o Q VAI SER BLOQUEADO E O QUE BLOQUEIA
+            bloqueia(zombi,parTeste);
             zombi.levarUmTiro(zombi,disparos,vestijos, player);
         });
     
+        bloqueia(player,parTeste);
         
         atualizaPosicaoDoPlayer();  // Atualiza a posição do jogador.
         camera.atualizaPosicao(player);  // Atualiza a posição da camera.
@@ -185,8 +196,7 @@ function main(){
         vampiros.forEach(function(e){
             contexto.drawImage(e.img, e.corteX, e.corteY, e.largura, e.altura, e.pontoX, e.pontoY, e.largura, e.altura);    
         });
-        
-        
+
         
         
        

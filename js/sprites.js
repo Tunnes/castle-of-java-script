@@ -14,7 +14,7 @@ var Personagem = function(pontoX, pontoY, largura, altura, enderecoImagem, corte
     this.quebraChamaX   = this.pontoX + 24;
     this.quebraChamaY   = this.pontoY - 24;
     this.score          = 0;
-    this.vida           = 4;
+    this.vida           = 400;
     
     }    
     Personagem.prototype.metadeDaLargura    = function(){ return this.largura/2;    }
@@ -88,8 +88,8 @@ var Inimigo = function(pontoX, pontoY, largura, altura, enderecoImagem, corteX, 
     Inimigo.prototype.seguir = function(focoX,focoY){
         if      (this.pontoX < focoX && this.pontoY < focoY) { this.pontoX = this.pontoX + 1; this.corteY = 0;   }
         else if (this.pontoX > focoX && this.pontoY > focoY) { this.pontoX = this.pontoX - 1; this.corteY = 77;  }
-        else if (this.pontoX < focoX)                        { this.pontoX = this.pontoX + 2; this.corteY = 0;   }
         else if (this.pontoX > focoX)                        { this.pontoX = this.pontoX - 2; this.corteY = 77;  }
+        else if (this.pontoX < focoX)                        { this.pontoX = this.pontoX + 2; this.corteY = 0;   }
         else if (this.pontoY < focoY)                        { this.pontoY = this.pontoY + 2; this.corteY = 231; }
         else if (this.pontoY > focoY)                        { this.pontoY = this.pontoY - 2; this.corteY = 154; }
         
@@ -100,6 +100,12 @@ var Inimigo = function(pontoX, pontoY, largura, altura, enderecoImagem, corteX, 
         disparos.forEach(function(tiro){
             /*global mataZombi*/
             mataZombi(quemLevou, tiro, vestijos, disparos, player);
+        });
+    }
+    Inimigo.prototype.naoMeToque = function(umFresco,osVampiros){
+        osVampiros.forEach(function(outroFresco){
+            /*global bloqueia*/
+            bloqueia(umFresco, outroFresco);
         });
     }
     
@@ -124,6 +130,7 @@ var Projetil =  function(pontoX, pontoY, largura, altura, direcao){
     this.direcao    = direcao;    
 }
     Projetil.prototype = new Personagem();
+    
 
 //  MUNIÇÕES ===================================================================================================================================
     function calibre20(disparos, direcao, pontoX, pontoY){
@@ -151,3 +158,14 @@ var Projetil =  function(pontoX, pontoY, largura, altura, direcao){
         }
         return disparos.push(tiro0, tiro1, tiro2);
     }
+    
+// PAREDE ===========================================================================================
+var Parede = function(pontoX, pontoY, largura, altura, corteX, corteY){
+    this.pontoX         = pontoX;
+    this.pontoY         = pontoY;
+    this.largura        = largura;
+    this.altura         = altura;
+    this.corteX         = corteX;
+    this.corteY         = corteY; 
+} 
+    Parede.prototype = new Personagem();
