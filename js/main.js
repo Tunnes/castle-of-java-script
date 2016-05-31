@@ -126,7 +126,7 @@ function main(){
         new Parede(4555   ,595   ,265     ,70, 4555   ,595 ),
         new Parede(3920   ,600   ,82      ,62, 3920   ,600 ),
     ];
-    for(var i = 0; i < 100; i++){
+    for(var i = 0; i < 40; i++){
         var x = Math.floor((Math.random() * 5000) + 1);
         var y = Math.floor((Math.random() * 2500) + 1);
         var zombi = new Inimigo(x,y,77,77,img.vamp,0,0);
