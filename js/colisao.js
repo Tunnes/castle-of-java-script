@@ -48,7 +48,7 @@
     }
     
 // PONTOS ----------------------------------------------------------------------------------------------------------------------
-function mataZombi(elemento01, elemento02,vestijos, disparos, player){
+function mataZombi(elemento01, elemento02,vestijos, corpos , disparos, player){
     
     var distanciaAtualX  = elemento01.pontoCentralX()   - elemento02.pontoCentralX();
     var distanciaAtualY  = elemento01.pontoCentralY()   - elemento02.pontoCentralY();
@@ -73,7 +73,8 @@ function mataZombi(elemento01, elemento02,vestijos, disparos, player){
           
         }else{
            elemento01.vivo = false;
-           console.log("Morri..");
+           var corp = new Cadaver(elemento01.pontoCentralX(),elemento01.pontoCentralY());
+            corpos.push(corp);
            return false
         }
     }

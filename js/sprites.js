@@ -80,26 +80,26 @@ var Inimigo = function(pontoX, pontoY, largura, altura, enderecoImagem, corteX, 
     this.corteY     = corteY; 
     this.frame      =  10;
     this.frameAtual =  0;
-    this.vida       =  100;
+    this.vida       =  5;
     this.vivo       = true;
 } 
     Inimigo.prototype = new Personagem();
     
     Inimigo.prototype.seguir = function(focoX,focoY){
-        if      (this.pontoX < focoX && this.pontoY < focoY) { this.pontoX = this.pontoX + 1; this.corteY = 0;   }
-        else if (this.pontoX > focoX && this.pontoY > focoY) { this.pontoX = this.pontoX - 1; this.corteY = 77;  }
-        else if (this.pontoX > focoX)                        { this.pontoX = this.pontoX - 2; this.corteY = 77;  }
-        else if (this.pontoX < focoX)                        { this.pontoX = this.pontoX + 2; this.corteY = 0;   }
-        else if (this.pontoY < focoY)                        { this.pontoY = this.pontoY + 2; this.corteY = 231; }
-        else if (this.pontoY > focoY)                        { this.pontoY = this.pontoY - 2; this.corteY = 154; }
+            if      (this.pontoX < focoX && this.pontoY < focoY) { this.pontoX += 3; this.corteY = 0;   }
+            else if (this.pontoX > focoX && this.pontoY > focoY) { this.pontoX -= 3; this.corteY = 77;  }
+            else if (this.pontoX > focoX)                        { this.pontoX -= 4; this.corteY = 77;  }
+            else if (this.pontoX < focoX)                        { this.pontoX += 4; this.corteY = 0;   }
+            else if (this.pontoY < focoY)                        { this.pontoY += 4; this.corteY = 231; }
+            else if (this.pontoY > focoY)                        { this.pontoY -= 4; this.corteY = 154; }    
+            this.atualizaSprite(this.altura,this.altura,this.corteY);
+            this.moveSprite();
         
-        this.atualizaSprite(this.altura,this.altura,this.corteY);
-        this.moveSprite();
     }
-    Inimigo.prototype.levarUmTiro = function(quemLevou,disparos,vestijos, player){
+    Inimigo.prototype.levarUmTiro = function(quemLevou,disparos,vestijos, corpos, player){
         disparos.forEach(function(tiro){
             /*global mataZombi*/
-            mataZombi(quemLevou, tiro, vestijos, disparos, player);
+            mataZombi(quemLevou, tiro, vestijos,corpos, disparos, player);
         });
     }
     Inimigo.prototype.naoMeToque = function(umFresco,osVampiros){
@@ -115,7 +115,17 @@ var Vestijo = function (pontoX, pontoY){
     this.largura    = 30;
     this.altura     = 30;
     this.img        = new Image(); 
-    this.img.src    = "../img/inimigo-vestijo.png";
+    this.img.src    = img.vestijo;
+    this.corteX     = 0;
+    this.corteY     = 0;
+}
+var Cadaver = function (pontoX, pontoY){
+    this.pontoX     = pontoX;
+    this.pontoY     = pontoY;
+    this.largura    = 126;
+    this.altura     = 150;
+    this.img        = new Image(); 
+    this.img.src    = img.cadaver;
     this.corteX     = 0;
     this.corteY     = 0;
 }
