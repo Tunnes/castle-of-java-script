@@ -1,5 +1,5 @@
 
-![Cabeçalho do Projeto](https://github.com/tunnes/fatec-isolation/blob/master/img/logo.png)
+![Cabeçalho do Projeto](https://github.com/tunnes/hotline-fatec-bs/blob/master/img/logo.png)
 ============
 ![Status de Desenvolvimento](https://img.shields.io/badge/Desenvolvimento-63%25-orange.svg)
 ![Licença](https://img.shields.io/badge/Licen%C3%A7a-MIT-blue.svg)
@@ -23,18 +23,18 @@
     </tr>
 </table>
 
-![Page Preview](https://github.com/tunnes/fatec-isolation/blob/master/img/readme_body.gif)
+![Gif Demo](https://github.com/tunnes/hotline-fatec-bs/blob/master/img/readme_body.png)
 
 ---
 
-##<sub>RECURSOS PRINCIPAIS</sub>
+##<sub>PRINCIPAIS RECURSOS</sub>
 - <sub>Object Prototype.</sub>
 - <sub>Recursive Functions.</sub>
 - <sub>High-Order Functions.</sub>
 - <sub>First-Class Functions.</sub>
 - <sub>Currying Functions.</sub>
 
-##<sub>TECNOLOGIAS UTILIADAS</sub>
+##<sub>TECNOLOGIAS UTILIZADAS</sub>
 - <sub>HTML5</sub>
 - <sub>CSS3</sub>
 - <sub>JavaScript 1.7</sub>
