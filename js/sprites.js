@@ -25,22 +25,22 @@ var Personagem = function(pontoX, pontoY, largura, altura, enderecoImagem, corte
     this.vida           = 400;
     
     }
-    Personagem.prototype.metadeDaLargura    = function(){ 
+    Personagem.prototype.metadeDaLargura = function(){ 
         return this.largura/2;
     }
-    Personagem.prototype.metadeDaAltura     = function(){ 
+    Personagem.prototype.metadeDaAltura  = function(){ 
         return this.altura/2;
     }
-    Personagem.prototype.pontoCentralX      = function(){ 
+    Personagem.prototype.pontoCentralX   = function(){ 
         return this.pontoX + this.metadeDaLargura();
     }
-    Personagem.prototype.pontoCentralY      = function(){ 
+    Personagem.prototype.pontoCentralY   = function(){ 
         return this.pontoY + this.metadeDaAltura();
     }
-    Personagem.prototype.atualizaSprite     = function(altura,largura,corteY){
+    Personagem.prototype.atualizaSprite  = function(altura,largura,corteY){
         return this.altura = altura, this.largura = largura, this.corteY = corteY; 
     }
-    Personagem.prototype.moveSprite         = function(){
+    Personagem.prototype.moveSprite      = function(){
         if (this.frameAtual == this.frame){
             this.corteX == this.largura*7 ? this.corteX = 0 : this.corteX += this.largura;    
             this.frameAtual = 0;
@@ -48,7 +48,7 @@ var Personagem = function(pontoX, pontoY, largura, altura, enderecoImagem, corte
             this.frameAtual++;
         }
     }
-    Personagem.prototype.disparar           = function(disparos){
+    Personagem.prototype.disparar        = function(disparos){
         function calibre20(disparos, direcao, pontoX, pontoY){
             switch (direcao){
             case "Esquerda":

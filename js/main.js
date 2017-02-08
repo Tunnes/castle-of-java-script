@@ -27,6 +27,12 @@
     var zombis      = [];                                      // Armazena informações de cada zombi (Isoladamente).
     
     var stringDaVida = "PATRICK + + + +";
+    
+//  0 -> Patrick
+//  1 -> Ayrton 
+//  2 -> Eric
+
+    var char = 1;
         
     var mundoDoGame   = new Mapa(0, 0, 5000, 5000, img.mapa, true);
     var player        = new Personagem(1447, 4254, 96, 53,img.playerPatrick, 0, 0);

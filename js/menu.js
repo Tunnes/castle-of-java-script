@@ -1,5 +1,4 @@
 function telaMenu(){
-        console.log("bugasso");
         fonteTema();
         var canvas = document.getElementById("telaDoJogo");
             canvas.width = document.documentElement.clientWidth - 10;
