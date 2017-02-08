@@ -23,7 +23,7 @@
     </tr>
 </table>
 
-![Gif Demo](https://github.com/tunnes/hotline-fatec-bs/blob/master/img/readme_body.png)
+![Gif Demo](https://github.com/tunnes/hotline-fatec-bs/blob/master/img/readme_body.gif)
 
 ---
 
