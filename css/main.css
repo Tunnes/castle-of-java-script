@@ -9,3 +9,13 @@ body {
   margin: 65px auto;
   border: 1px solid black;
 }
+
+#teste{
+    background-image: url(../img/moshed_2017-1-9_13.38.44.gif);
+    background-size: cover;
+    width: 99%;
+    position: absolute;
+    top: 65px;
+    z-index: -1;
+    height: 500px;
+}

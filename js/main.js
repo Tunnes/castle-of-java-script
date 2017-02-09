@@ -249,7 +249,7 @@
         zombi: "../img/inimigo-vampiro.png",
         vestijo: "../img/inimigo-vestijo.png",
         teste: "../img/camada-de-colisao.jpg",
-        controles: "../img/teclado.png"
+        controles: "../img/call2.png"
     };
     function loadImages(sources, callback) {
             var images = {};
@@ -286,6 +286,6 @@
         contexto.clearRect(0,0,canvas.width,canvas.height);
         contexto.font = "60px VT323";
         contexto.fillStyle = "white";
-        contexto.fillText("LOADING... "+ passo +"%", canvas.width/2.8, canvas.height/2);
+        contexto.fillText("LOADING... "+ passo.toFixed(1) +"%", canvas.width/2.8, canvas.height/2);
     }
     
