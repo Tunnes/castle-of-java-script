@@ -1,10 +1,11 @@
 
 ![Cabeçalho do Projeto](https://github.com/tunnes/hotline-fatec-bs/blob/master/img/logo.png)
 ============
+
 ![Status de Desenvolvimento](https://img.shields.io/badge/Desenvolvimento-63%25-orange.svg)
 ![Licença](https://img.shields.io/badge/Licen%C3%A7a-MIT-blue.svg)
 ![Demo](https://img.shields.io/badge/Demo-Desativada-red.svg)
-![Linguagem Principal](https://img.shields.io/badge/Linguagem-Portugu%C3%AAs%20BR-brightgreen.svg)
+![Idioma](https://img.shields.io/badge/Idioma-Portugu%C3%AAs-brightgreen.svg)
 
 <table>
     <tr>
