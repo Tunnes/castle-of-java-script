@@ -243,15 +243,26 @@
 
 
 //  TELA-DE-LOADING ====================================================================================================================
+    // var raiz = window.location.href
+    // var img={
+    //     mapa:  raiz + "/img/background.jpg",
+    //     playerPatrick: raiz + "/img/player-patrick.png",
+    //     zombi: raiz + "/img/inimigo-vampiro.png",
+    //     vestijo: raiz + "/img/inimigo-vestijo.png",
+    //     teste: raiz + "/img/camada-de-colisao.jpg",
+    //     controles: raiz + "/img/call2.png"
+    // };
+    
+    var raiz = window.location.href
     var img={
-        mapa:"../img/background.jpg",
-        playerPatrick:"../img/player-patrick.png",
-        zombi: "../img/inimigo-vampiro.png",
-        vestijo: "../img/inimigo-vestijo.png",
-        teste: "../img/camada-de-colisao.jpg",
-        controles: "http://i.imgur.com/DqwukVe.png"
-        // controles: "../img/call2.png"
+        mapa: "/img/background.jpg",
+        playerPatrick: "/img/player-patrick.png",
+        zombi: "/img/inimigo-vampiro.png",
+        vestijo: "/img/inimigo-vestijo.png",
+        teste: "/img/camada-de-colisao.jpg",
+        controles: "/img/call2.png"
     };
+    
     function loadImages(sources, callback) {
             var images = {};
             var loadedImages = 0;
