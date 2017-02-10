@@ -4,7 +4,7 @@
 
 ![Status de Desenvolvimento](https://img.shields.io/badge/Desenvolvimento-63%25-orange.svg)
 ![Licença](https://img.shields.io/badge/Licen%C3%A7a-MIT-blue.svg)
-![Demo](https://img.shields.io/badge/Demo-Desativada-red.svg)
+[![Build Status](https://img.shields.io/badge/Demo-Ativa-brightgreen.svg)](http://tunnes.github.io/hotline-fatec-bs/)
 ![Idioma](https://img.shields.io/badge/Idioma-Portugu%C3%AAs-brightgreen.svg)
 
 <table>
@@ -47,4 +47,21 @@
 - [ ] <sub>Implementar e confeccionar sprites do segundo andar (Prédio Velho).</sub>
 - [ ] <sub>Implementar Diálogos, NPCS e Objetivos do Game. </sub>
 
-
+##<sub>DEMO DISPONÍVEL</sub>
+<table>
+    <tr>
+        <td>
+        <sub>
+        Bom... Se você ficou curioso mesmo ou apenas quer testar e ver como o jogo funciona, entender a mecânica
+        ou apenas visualizar a identidade visual do projeto, você pode acessar a demo que deixei disponível em
+        <strong><a href="http://tunnes.github.io/hotline-fatec-bs/">HOTLINE FATEC-BS</a></strong>
+        <br>
+        <br>
+        <strong>OBS:</strong> O sistema de colisão com paredes foi refatorado recentemente então ainda existem 'bugs'
+        com overflow de chamadas de função por causa do prototype de frames, caso isto venha a acontecer simplesmente
+        <strong>pressione F5</strong> isto irá sanar o problema e você poderá jogar normalmente. O problema oucorre
+        devido a configuração de aceleração de hardware do o browser em utilizado para renderização do jogo.
+        </sub>
+        </td>
+    </tr>
+</table>
