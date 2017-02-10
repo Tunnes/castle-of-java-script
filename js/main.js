@@ -249,7 +249,8 @@
         zombi: "../img/inimigo-vampiro.png",
         vestijo: "../img/inimigo-vestijo.png",
         teste: "../img/camada-de-colisao.jpg",
-        controles: "../img/call2.png"
+        controles: "http://i.imgur.com/DqwukVe.png"
+        // controles: "../img/call2.png"
     };
     function loadImages(sources, callback) {
             var images = {};
