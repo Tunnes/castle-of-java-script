@@ -243,24 +243,18 @@
 
 
 //  TELA-DE-LOADING ====================================================================================================================
-    // var raiz = window.location.href
-    // var img={
-    //     mapa:  raiz + "/img/background.jpg",
-    //     playerPatrick: raiz + "/img/player-patrick.png",
-    //     zombi: raiz + "/img/inimigo-vampiro.png",
-    //     vestijo: raiz + "/img/inimigo-vestijo.png",
-    //     teste: raiz + "/img/camada-de-colisao.jpg",
-    //     controles: raiz + "/img/call2.png"
-    // };
-    
-    var raiz = window.location.href
+//  Devido a problemas para exibição no GitPages foi necessario o uso desta MVP (Produto minimo viavel) 
+//  para solucionar a anomania de paths:
+
+    var raizPrefixa = window.location.host == 'tunnes.github.io' ? "../hotline-fatec-bs/img/" : "../img/"; 
+
     var img={
-        mapa: "/img/background.jpg",
-        playerPatrick: "/img/player-patrick.png",
-        zombi: "/img/inimigo-vampiro.png",
-        vestijo: "/img/inimigo-vestijo.png",
-        teste: "/img/camada-de-colisao.jpg",
-        controles: "/img/call2.png"
+        mapa: raizPrefixa + "background.jpg",
+        playerPatrick: raizPrefixa + "player-patrick.png",
+        zombi: raizPrefixa + "inimigo-vampiro.png",
+        vestijo: raizPrefixa + "inimigo-vestijo.png",
+        teste: raizPrefixa + "camada-de-colisao.jpg",
+        controles: raizPrefixa + "call2.png"
     };
     
     function loadImages(sources, callback) {
