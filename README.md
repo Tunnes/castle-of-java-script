@@ -11,7 +11,7 @@
     <tr>
         <td>
         <sub>
-        Este projeto é uma breve paródia de um dos meus jogos favoritos (Hotline Miami) e também uma homenagem a minha amda
+        Este projeto é uma breve paródia de um dos meus jogos favoritos (Hotline Miami) e também uma homenagem a minha amada
         faculdade <a href="http://fatecrl.edu.br/">(Fatec Baixada Santista)</a>, trata-se de um jogo de estilo 'Top-Down' 
         onde como player temos eu e meus grandes amigos @ptkato e @ericshortcut, o jogo foi desenvolvido apenas com 
         JavaScript, HTML5 e CSS3. Foi necessária a utilização da tag Canvas e algumas de suas funções nativas. Em nenhum 
