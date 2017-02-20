@@ -58,9 +58,8 @@
         <br>
         <br>
         <strong>OBS:</strong> O sistema de colisão com paredes foi refatorado recentemente então ainda existem 'bugs'
-        com overflow de chamadas de função por causa do prototype de frames, caso isto venha a acontecer simplesmente
-        <strong>pressione F5</strong> isto irá sanar o problema e você poderá jogar normalmente. O problema oucorre
-        devido a configuração de aceleração de hardware do o browser em utilizado para renderização do jogo.
+        por causa do prototype, caso isto venha a acontecer simplesmente <strong>pressione F5</strong> isto irá sanar
+        o problema e você poderá jogar normalmente.
         </sub>
         </td>
     </tr>
