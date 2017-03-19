@@ -28,26 +28,26 @@
 
 ---
 
-##<sub>PRINCIPAIS RECURSOS</sub>
+#<sub>PRINCIPAIS RECURSOS</sub>
 - <sub>Object Prototype.</sub>
 - <sub>Recursive Functions.</sub>
 - <sub>High-Order Functions.</sub>
 - <sub>First-Class Functions.</sub>
 - <sub>Currying Functions.</sub>
 
-##<sub>TECNOLOGIAS UTILIZADAS</sub>
+#<sub>TECNOLOGIAS UTILIZADAS</sub>
 - <sub>HTML5</sub>
 - <sub>CSS3</sub>
 - <sub>JavaScript 1.7</sub>
 
-##<sub>OBJETIVOS PRINCIPAIS</sub>
+#<sub>OBJETIVOS PRINCIPAIS</sub>
 - [x] <sub>Implementar componentes de física e colisão.</sub>
 - [x] <sub>Desenvolver prototypes dos players.</sub>
 - [ ] <sub>Confeccionar sprites dos players principais (Eu / Eric).</sub>
 - [ ] <sub>Implementar e confeccionar sprites do segundo andar (Prédio Velho).</sub>
 - [ ] <sub>Implementar Diálogos, NPCS e Objetivos do Game. </sub>
 
-##<sub>DEMO DISPONÍVEL</sub>
+#<sub>DEMO DISPONÍVEL</sub>
 <table>
     <tr>
         <td>
