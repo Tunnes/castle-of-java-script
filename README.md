@@ -4,8 +4,6 @@
 
 ![Status de Desenvolvimento](https://img.shields.io/badge/Desenvolvimento-63%25-orange.svg)
 ![Licença](https://img.shields.io/badge/Licen%C3%A7a-MIT-blue.svg)
-[![Build Status](https://img.shields.io/badge/Demo-Ativa-brightgreen.svg)](http://tunnes.github.io/hotline-fatec-bs/)
-![Idioma](https://img.shields.io/badge/Idioma-Portugu%C3%AAs-brightgreen.svg)
 
 <table>
     <tr>
@@ -38,14 +36,6 @@
 <sub>**TECNOLOGIAS UTILIZADAS**</sub>
 - <sub>HTML5</sub>
 - <sub>CSS3</sub>
-- <sub>JavaScript 1.7</sub>
-
-<sub>**OBJETIVOS PRINCIPAIS**</sub>
-- [x] <sub>Implementar componentes de física e colisão.</sub>
-- [x] <sub>Desenvolver prototypes dos players.</sub>
-- [ ] <sub>Confeccionar sprites dos players principais (Eu / Eric).</sub>
-- [ ] <sub>Implementar e confeccionar sprites do segundo andar (Prédio Velho).</sub>
-- [ ] <sub>Implementar Diálogos, NPCS e Objetivos do Game. </sub>
 
 <sub>**DEMO DISPONÍVEL**</sub>
 <table>
@@ -55,12 +45,6 @@
         Bom... Se você ficou curioso mesmo ou apenas quer testar e ver como o jogo funciona, entender a mecânica
         ou apenas visualizar a identidade visual do projeto, você pode acessar a demo que deixei disponível em
         <strong><a href="http://tunnes.github.io/hotline-fatec-bs/">HOTLINE FATEC-BS</a></strong>
-        <br>
-        <br>
-        <strong>OBS:</strong> O sistema de colisão com paredes foi refatorado recentemente então ainda existem 'bugs'
-        por causa do prototype, caso isto venha a acontecer simplesmente <strong>pressione F5</strong> isto irá sanar
-        o problema e você poderá jogar normalmente.
-        </sub>
         </td>
     </tr>
 </table>
